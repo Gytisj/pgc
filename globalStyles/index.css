@@ -2,6 +2,11 @@ html {
   scroll-behavior: smooth;
 }
 
+body {
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+}
+
 .artist-gallery-back-button {
   z-index: 1000;
 

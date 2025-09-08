@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, X, ArrowLeft } from "lucide-react";
@@ -25,28 +25,32 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
     return () => clearTimeout(timer);
   }, []);
 
-  const openLightbox = (index: number) => {
+  const openLightbox = useCallback((index: number) => {
     setSelectedImage(index);
-  };
+    // Prevent body scroll when lightbox is open
+    document.body.style.overflow = "hidden";
+  }, []);
 
-  const closeLightbox = () => {
+  const closeLightbox = useCallback(() => {
     setSelectedImage(null);
-  };
+    // Restore body scroll when lightbox is closed
+    document.body.style.overflow = "unset";
+  }, []);
 
-  const nextImage = () => {
+  const nextImage = useCallback(() => {
     if (selectedImage !== null) {
       setSelectedImage((selectedImage + 1) % artist.galleryImages.length);
     }
-  };
+  }, [selectedImage, artist.galleryImages.length]);
 
-  const prevImage = () => {
+  const prevImage = useCallback(() => {
     if (selectedImage !== null) {
       setSelectedImage(
         (selectedImage - 1 + artist.galleryImages.length) %
           artist.galleryImages.length
       );
     }
-  };
+  }, [selectedImage, artist.galleryImages.length]);
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
@@ -59,10 +63,17 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, [selectedImage]);
+  }, [selectedImage, nextImage, prevImage, closeLightbox]);
+
+  // Cleanup effect to ensure body scroll is restored on unmount
+  useEffect(() => {
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white">
+    <div className="min-h-screen bg-black text-white overflow-x-hidden">
       {/* Header Section */}
       <section
         ref={sectionRef}
@@ -191,28 +202,28 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
       {/* Lightbox */}
       {selectedImage !== null && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center">
+        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center overflow-hidden">
           {/* Close Button */}
           <button
             onClick={closeLightbox}
-            className="absolute top-6 right-6 text-white hover:text-gray-300 transition-colors z-60"
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
           >
-            <X className="w-8 h-8" />
+            <X className="w-6 h-6 md:w-8 md:h-8" />
           </button>
 
           {/* Navigation Arrows */}
           <button
             onClick={prevImage}
-            className="absolute left-6 text-white hover:text-gray-300 transition-colors z-60"
+            className="absolute left-4 md:left-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
           >
-            <ChevronLeft className="w-12 h-12" />
+            <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
           </button>
 
           <button
             onClick={nextImage}
-            className="absolute right-6 text-white hover:text-gray-300 transition-colors z-60"
+            className="absolute right-4 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
           >
-            <ChevronRight className="w-12 h-12" />
+            <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
           </button>
 
           {/* Image */}

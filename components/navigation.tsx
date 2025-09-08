@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
+import { X } from "lucide-react";
 import pgcImage from "./assets/pgc.jpg";
 
 export default function Navigation() {
@@ -21,6 +22,37 @@ export default function Navigation() {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  // Handle body scroll lock when mobile menu is open
+  useEffect(() => {
+    if (isMobileMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+
+    // Cleanup function to restore scroll when component unmounts
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMobileMenuOpen]);
+
+  // Handle ESC key to close mobile menu
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    if (isMobileMenuOpen) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [isMobileMenuOpen]);
 
   return (
     <nav
@@ -91,29 +123,41 @@ export default function Navigation() {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? "opacity-100 max-h-40" : "opacity-0 max-h-0"
-        } overflow-hidden bg-black bg-opacity-95`}
+        className={`md:hidden fixed inset-0 z-50 transition-all duration-300 ${
+          isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
+        } bg-black`}
+        onClick={() => setIsMobileMenuOpen(false)}
       >
-        <div className="px-6 py-2">
-          <div className="flex flex-col space-y-1">
+        {/* Close Button */}
+        <button
+          onClick={() => setIsMobileMenuOpen(false)}
+          className="absolute top-4 right-8 text-white hover:text-gray-300 transition-colors z-60 p-2"
+        >
+          <X className="w-8 h-8" />
+        </button>
+
+        <div
+          className="flex flex-col items-center justify-center h-full space-y-12"
+          onClick={(e) => e.stopPropagation()}
+        >
+          <div className="text-center space-y-8">
             <Link
               href="/"
-              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
+              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/#about"
-              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
+              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/#contact"
-              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
+              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact
