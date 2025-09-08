@@ -88,6 +88,12 @@ export default function Navigation() {
               About
             </Link>
             <Link
+              href="/#artists"
+              className="hover:text-gray-300 transition-colors"
+            >
+              Artists
+            </Link>
+            <Link
               href="/#contact"
               className="hover:text-gray-300 transition-colors"
             >
@@ -154,6 +160,13 @@ export default function Navigation() {
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
+            </Link>
+            <Link
+              href="/#artists"
+              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
+              onClick={() => setIsMobileMenuOpen(false)}
+            >
+              Artists
             </Link>
             <Link
               href="/#contact"
