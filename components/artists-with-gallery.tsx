@@ -117,7 +117,10 @@ export default function ArtistsWithGallery() {
   return (
     <>
       {/* Parallax Header Section */}
-      <section className="relative h-[300px] md:h-[400px] overflow-hidden flex items-center justify-center">
+      <section
+        id="artists"
+        className="relative h-[300px] md:h-[400px] overflow-hidden flex items-center justify-center"
+      >
         {/* Background Image with fixed attachment */}
         <div className="absolute inset-0 w-full h-full">
           {isMobile ? (
@@ -162,7 +165,6 @@ export default function ArtistsWithGallery() {
 
       {/* Artists Grid Section */}
       <section
-        id="artists"
         ref={sectionRef}
         className="relative py-10 md:py-20 bg-black text-white"
       >
