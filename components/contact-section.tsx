@@ -78,7 +78,7 @@ export default function ContactSection() {
                 <div className="flex items-center space-x-4">
                   <Instagram className="w-6 h-6 text-white" />
                   <div>
-                    <p className="font-semibold">Instagram</p>
+                    <p className="font-semibold">INSTAGRAM</p>
                     <a
                       href="https://instagram.com/pain_game_club"
                       target="_blank"

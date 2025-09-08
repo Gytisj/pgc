@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import tattooLights from "./assets/tattoo-lights.jpg";
 import StyledButton from "./styled-button";
 import { getAllArtists } from "@/lib/artists-data";
@@ -10,7 +11,10 @@ import { getAllArtists } from "@/lib/artists-data";
 export default function ArtistsWithGallery() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+  const [canScrollLeft, setCanScrollLeft] = useState(false);
+  const [canScrollRight, setCanScrollRight] = useState(true);
   const sectionRef = useRef<HTMLElement>(null);
+  const carouselRef = useRef<HTMLDivElement>(null);
   const artists = getAllArtists();
 
   // Detect mobile device
@@ -28,6 +32,54 @@ export default function ArtistsWithGallery() {
     window.addEventListener("resize", checkMobile);
 
     return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
+  // Check scroll position to show/hide arrows
+  const checkScrollPosition = () => {
+    if (carouselRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
+      setCanScrollLeft(scrollLeft > 0);
+      setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+    }
+  };
+
+  // Carousel navigation functions
+  const scrollLeft = () => {
+    if (carouselRef.current) {
+      const cardWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
+      carouselRef.current.scrollBy({
+        left: -cardWidth,
+        behavior: "smooth",
+      });
+      // Check scroll position after animation
+      setTimeout(checkScrollPosition, 300);
+    }
+  };
+
+  const scrollRight = () => {
+    if (carouselRef.current) {
+      const cardWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
+      carouselRef.current.scrollBy({
+        left: cardWidth,
+        behavior: "smooth",
+      });
+      // Check scroll position after animation
+      setTimeout(checkScrollPosition, 300);
+    }
+  };
+
+  // Set up scroll listener for carousel
+  useEffect(() => {
+    const carousel = carouselRef.current;
+    if (carousel) {
+      carousel.addEventListener("scroll", checkScrollPosition);
+      // Initial check
+      checkScrollPosition();
+
+      return () => {
+        carousel.removeEventListener("scroll", checkScrollPosition);
+      };
+    }
   }, []);
 
   // Preload the parallax image for better performance
@@ -115,8 +167,8 @@ export default function ArtistsWithGallery() {
         className="relative py-10 md:py-20 bg-black text-white"
       >
         <div className="container mx-auto px-6">
-          {/* Artists Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
+          {/* Artists Grid - Desktop / Carousel - Mobile */}
+          <div className="hidden md:grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
             {artists.map((artist, index) => (
               <div key={artist.id} className="group">
                 {/* Artist Card */}
@@ -156,6 +208,91 @@ export default function ArtistsWithGallery() {
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Mobile Carousel */}
+          <div className="md:hidden">
+            {/* Scroll hint */}
+            {/* <div className="text-center mb-4">
+              <p className="text-gray-400 text-sm">
+                ← Swipe to see all artists →
+              </p>
+            </div> */}
+
+            <div
+              ref={carouselRef}
+              className="flex overflow-x-auto gap-4 pb-4 pl-6 pr-6 scrollbar-hide snap-x snap-mandatory"
+            >
+              {artists.map((artist, index) => (
+                <div
+                  key={artist.id}
+                  className="flex-none w-80 snap-start group"
+                >
+                  {/* Artist Card */}
+                  <div className="bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition-colors duration-300 h-full flex flex-col">
+                    {/* Artist Image */}
+                    <div className="relative h-48 w-full overflow-hidden">
+                      <Image
+                        src={artist.image}
+                        alt={artist.name}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black/20 group-hover:bg-black/10 transition-colors duration-300" />
+                    </div>
+
+                    {/* Card Content */}
+                    <div className="p-6 flex-1 flex flex-col">
+                      {/* View Gallery Button */}
+                      <div className="mb-4">
+                        <Link href={`/artist/${artist.slug}`}>
+                          <StyledButton size="sm" className="w-full">
+                            VIEW GALLERY
+                          </StyledButton>
+                        </Link>
+                      </div>
+
+                      {/* Artist Name */}
+                      <h3 className="text-xl font-bold mb-3 text-center">
+                        {artist.name}
+                      </h3>
+
+                      {/* Artist Description */}
+                      <p className="text-gray-300 text-sm leading-relaxed flex-1">
+                        {artist.description}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            {/* Navigation Arrows Below Carousel */}
+            <div className="flex justify-between items-center gap-6 mt-8">
+              <button
+                onClick={scrollLeft}
+                disabled={!canScrollLeft}
+                className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 ${
+                  canScrollLeft
+                    ? "bg-white text-black hover:bg-gray-100 hover:scale-110 shadow-xl"
+                    : "bg-gray-800 text-gray-500 cursor-not-allowed opacity-50"
+                }`}
+              >
+                <ChevronLeft className="w-7 h-7" />
+              </button>
+
+              <button
+                onClick={scrollRight}
+                disabled={!canScrollRight}
+                className={`flex items-center justify-center w-14 h-14 rounded-full transition-all duration-300 ${
+                  canScrollRight
+                    ? "bg-white text-black hover:bg-gray-100 hover:scale-110 shadow-xl"
+                    : "bg-gray-800 text-gray-500 cursor-not-allowed opacity-50"
+                }`}
+              >
+                <ChevronRight className="w-7 h-7" />
+              </button>
+            </div>
           </div>
         </div>
       </section>
