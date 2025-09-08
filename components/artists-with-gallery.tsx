@@ -13,6 +13,7 @@ export default function ArtistsWithGallery() {
   const [isMobile, setIsMobile] = useState(false);
   const [canScrollLeft, setCanScrollLeft] = useState(false);
   const [canScrollRight, setCanScrollRight] = useState(true);
+  const [currentDot, setCurrentDot] = useState(0);
   const sectionRef = useRef<HTMLElement>(null);
   const carouselRef = useRef<HTMLDivElement>(null);
   const artists = getAllArtists();
@@ -34,12 +35,17 @@ export default function ArtistsWithGallery() {
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
-  // Check scroll position to show/hide arrows
+  // Check scroll position to show/hide arrows and update dots
   const checkScrollPosition = () => {
     if (carouselRef.current) {
       const { scrollLeft, scrollWidth, clientWidth } = carouselRef.current;
       setCanScrollLeft(scrollLeft > 0);
       setCanScrollRight(scrollLeft < scrollWidth - clientWidth - 1);
+
+      // Calculate current dot based on scroll position
+      const cardWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
+      const currentIndex = Math.round(scrollLeft / cardWidth);
+      setCurrentDot(currentIndex);
     }
   };
 
@@ -61,6 +67,19 @@ export default function ArtistsWithGallery() {
       const cardWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
       carouselRef.current.scrollBy({
         left: cardWidth,
+        behavior: "smooth",
+      });
+      // Check scroll position after animation
+      setTimeout(checkScrollPosition, 300);
+    }
+  };
+
+  // Scroll to specific dot position
+  const scrollToDot = (index: number) => {
+    if (carouselRef.current) {
+      const cardWidth = 320 + 16; // w-80 (320px) + gap-4 (16px)
+      carouselRef.current.scrollTo({
+        left: index * cardWidth,
         behavior: "smooth",
       });
       // Check scroll position after animation
@@ -282,6 +301,21 @@ export default function ArtistsWithGallery() {
               >
                 <ChevronLeft className="w-7 h-7" />
               </button>
+
+              {/* Scroll Indicator Dots */}
+              <div className="flex space-x-1">
+                {artists.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => scrollToDot(index)}
+                    className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                      currentDot === index
+                        ? "bg-white scale-125"
+                        : "bg-gray-600 hover:bg-gray-400"
+                    }`}
+                  />
+                ))}
+              </div>
 
               <button
                 onClick={scrollRight}

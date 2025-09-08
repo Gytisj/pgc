@@ -123,12 +123,6 @@ body {
     line-height: 1.2;
   }
 
-  /* Better touch targets for mobile */
-  button {
-    min-height: 44px;
-    min-width: 44px;
-  }
-
   /* Improve scroll behavior on mobile */
   html {
     scroll-behavior: smooth;
