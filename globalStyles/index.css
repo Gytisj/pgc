@@ -1,0 +1,7 @@
+html {
+  scroll-behavior: smooth;
+}
+
+.artist-gallery-back-button {
+  z-index: 1000;
+}

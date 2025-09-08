@@ -33,27 +33,27 @@ export default function ParallaxSection() {
       </div>
 
       {/* Content overlay */}
-      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-6">
+      <div className="relative z-10 text-center text-white max-w-4xl mx-auto px-4 md:px-6">
         <div className="space-y-6">
-          <h2 className="pgc-header text-4xl md:text-6xl font-bold tracking-wider mb-8">
+          <h2 className="pgc-header text-3xl md:text-4xl lg:text-6xl font-bold tracking-wider mb-6 md:mb-8">
             ART THAT SPEAKS
           </h2>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-lg md:text-xl lg:text-2xl text-gray-200 max-w-2xl mx-auto leading-relaxed px-4">
             Every line tells a story. Every shade carries meaning. Transform
             your vision into permanent art.
           </p>
-          <div className="pt-8">
-            <div className="inline-flex items-center space-x-4 bg-black/40 backdrop-blur-sm px-8 py-4 rounded-full">
-              <div className="w-12 h-12 bg-white rounded-full flex items-center justify-center">
+          <div className="pt-6 md:pt-8">
+            <div className="inline-flex items-center space-x-3 md:space-x-4 bg-black/40 backdrop-blur-sm px-6 md:px-8 py-3 md:py-4 rounded-full">
+              <div className="w-10 h-10 md:w-12 md:h-12 bg-white rounded-full flex items-center justify-center">
                 <Image
                   src={pgcLogo}
                   alt="pgc logo"
                   width={75}
                   height={75}
-                  className="rounded-full"
+                  className="rounded-full w-8 h-8 md:w-10 md:h-10"
                 />
               </div>
-              <span className="text-lg font-semibold tracking-wider">
+              <span className="text-base md:text-lg font-semibold tracking-wider">
                 PAIN GAME CLUB
               </span>
             </div>

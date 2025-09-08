@@ -7,6 +7,7 @@ import pgcLogo from "./assets/pgc.jpg";
 
 export default function HeroSection() {
   const [logoVisible, setLogoVisible] = useState(false);
+  const [scrollButtonVisible, setScrollButtonVisible] = useState(true);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -15,9 +16,36 @@ export default function HeroSection() {
     return () => clearTimeout(timer);
   }, []);
 
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollPosition = window.scrollY;
+      const windowHeight = window.innerHeight;
+
+      // Hide scroll button when user scrolls more than 10% of viewport height
+      setScrollButtonVisible(scrollPosition < windowHeight * 0.1);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   const scrollToNext = () => {
-    const aboutSection = document.getElementById("about");
-    aboutSection?.scrollIntoView({ behavior: "smooth" });
+    const appointmentSection = document.getElementById("appointment");
+    if (appointmentSection) {
+      const elementRect = appointmentSection.getBoundingClientRect();
+      const absoluteElementTop = elementRect.top + window.pageYOffset;
+      const elementHeight = appointmentSection.offsetHeight;
+      const windowHeight = window.innerHeight;
+
+      // Calculate the scroll position to center the element
+      const scrollToPosition =
+        absoluteElementTop - windowHeight / 2 + elementHeight / 2;
+
+      window.scrollTo({
+        top: scrollToPosition,
+        behavior: "smooth",
+      });
+    }
   };
 
   return (
@@ -53,25 +81,37 @@ export default function HeroSection() {
           logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
         }`}
       >
-        <div className="w-48 h-48 mx-auto mb-8 relative">
-          <div className="w-full h-full rounded-full bg-white flex items-center justify-center shadow-2xl">
-            <Image
-              src={pgcLogo}
-              alt="Pain Game Club"
-              width={150}
-              height={150}
-              className="rounded-full"
-            />
+        <div className="space-y-8 text-center">
+          <div
+            className={`transition-all duration-1000 ${
+              logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
+            } mb-8`}
+          >
+            <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-2xl relative mx-auto">
+              <Image
+                src={pgcLogo}
+                alt="Pain Game Club"
+                width={120}
+                height={120}
+                className="rounded-full w-24 h-24 md:w-32 md:h-32 object-cover"
+              />
+              <div className="absolute inset-0 rounded-full border-4 border-white/30 animate-pulse" />
+            </div>
           </div>
-          <div className="absolute inset-0 rounded-full border-4 border-white/30 animate-pulse" />
+          <h1 className="pgc-header text-3xl md:text-4xl lg:text-6xl font-bold mb-4 tracking-wider px-4">
+            Welcome to the game
+          </h1>
         </div>
-        <h1 className="pgc-header text-4xl md:text-6xl font-bold mb-4 tracking-wider">
-          Welcome to the game
-        </h1>
       </div>
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10">
+      <div
+        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 transition-all duration-500 ${
+          scrollButtonVisible
+            ? "opacity-100 translate-y-0"
+            : "opacity-0 translate-y-4 pointer-events-none"
+        }`}
+      >
         <button
           onClick={scrollToNext}
           className="flex flex-col items-center text-white/70 hover:text-white transition-colors group"

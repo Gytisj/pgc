@@ -109,3 +109,29 @@ body {
   color: hsl(var(--foreground));
   background: hsl(var(--background));
 }
+
+/* Mobile-specific improvements */
+@media (max-width: 768px) {
+  .pgc-header::after {
+    width: 4px;
+    height: 4px;
+    margin-left: 0.3em;
+  }
+
+  /* Ensure text doesn't overflow on small screens */
+  .pgc-header {
+    line-height: 1.2;
+  }
+
+  /* Better touch targets for mobile */
+  button {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* Improve scroll behavior on mobile */
+  html {
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+  }
+}
