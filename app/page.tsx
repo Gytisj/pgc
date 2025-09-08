@@ -5,7 +5,6 @@ import AboutSection from "@/components/about-section";
 import ArtistsWithGallery from "@/components/artists-with-gallery";
 import ContactSection from "@/components/contact-section";
 import ParallaxSection from "@/components/parallax-section";
-import CtaButton from "@/components/cta-button";
 import Footer from "@/components/footer";
 
 import "@/globalStyles/index.css";
@@ -21,9 +20,6 @@ export default function Home() {
       <ParallaxSection />
       <ContactSection />
       <Footer />
-
-      {/* Fixed CTA Button */}
-      <CtaButton />
     </main>
   );
 }
