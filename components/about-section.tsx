@@ -8,7 +8,25 @@ import pgcLogo from "./assets/pgc.jpg";
 
 export default function AboutSection() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Preload the parallax image for better performance
   useEffect(() => {
@@ -46,19 +64,33 @@ export default function AboutSection() {
     <>
       {/* Parallax Header Section */}
       <section
-        className="relative h-[400px] overflow-hidden flex items-center justify-center"
+        className="relative h-[300px] md:h-[400px] overflow-hidden flex items-center justify-center"
         id="about"
       >
         {/* Background Image with fixed attachment */}
         <div className="absolute inset-0 w-full h-full">
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{
-              backgroundImage: `url(${imageSrc})`,
-              backgroundPosition: "center 60%",
-              filter: "brightness(0.6) contrast(1.3)",
-            }}
-          />
+          {isMobile ? (
+            <Image
+              src={tattooUpclose}
+              alt="Background"
+              fill
+              className="object-cover"
+              style={{
+                filter: "brightness(0.6) contrast(1.3)",
+                objectPosition: "center 60%",
+              }}
+              priority
+            />
+          ) : (
+            <div
+              className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
+              style={{
+                backgroundImage: `url(${imageSrc})`,
+                backgroundPosition: "center 60%",
+                filter: "brightness(0.6) contrast(1.3)",
+              }}
+            />
+          )}
           {/* Gradient overlay for better text contrast */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/50" />
         </div>
@@ -80,11 +112,11 @@ export default function AboutSection() {
       {/* About Content Section */}
       <section
         ref={sectionRef}
-        className={`relative py-20 bg-black text-white transition-opacity duration-1000 ${
+        className={`relative py-10 md:py-20 bg-black text-white transition-opacity duration-1000 ${
           isVisible ? "opacity-100" : "opacity-50"
         }`}
       >
-        <div className="relative min-h-[400px] md:min-h-[600px]">
+        <div className="relative min-h-[300px] md:min-h-[600px]">
           {/* Text content container - responsive layout */}
           <div className="container mx-auto px-6">
             <div className="md:h-[600px] md:flex md:items-center">

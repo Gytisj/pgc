@@ -9,8 +9,26 @@ import { getAllArtists } from "@/lib/artists-data";
 
 export default function ArtistsWithGallery() {
   const [isVisible, setIsVisible] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
   const sectionRef = useRef<HTMLElement>(null);
   const artists = getAllArtists();
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   // Preload the parallax image for better performance
   useEffect(() => {
@@ -26,7 +44,7 @@ export default function ArtistsWithGallery() {
           setIsVisible(true);
         }
       },
-      { threshold: 0.3 }
+      { threshold: 0.1 }
     );
 
     const currentRef = sectionRef.current;
@@ -47,17 +65,31 @@ export default function ArtistsWithGallery() {
   return (
     <>
       {/* Parallax Header Section */}
-      <section className="relative h-[400px] overflow-hidden flex items-center justify-center">
+      <section className="relative h-[300px] md:h-[400px] overflow-hidden flex items-center justify-center">
         {/* Background Image with fixed attachment */}
         <div className="absolute inset-0 w-full h-full">
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
-            style={{
-              backgroundImage: `url(${imageSrc})`,
-              backgroundPosition: "center 40%",
-              filter: "brightness(0.6) contrast(1.3)",
-            }}
-          />
+          {isMobile ? (
+            <Image
+              src={tattooLights}
+              alt="Background"
+              fill
+              className="object-cover"
+              style={{
+                filter: "brightness(0.6) contrast(1.3)",
+                objectPosition: "center 40%",
+              }}
+              priority
+            />
+          ) : (
+            <div
+              className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
+              style={{
+                backgroundImage: `url(${imageSrc})`,
+                backgroundPosition: "center 40%",
+                filter: "brightness(0.6) contrast(1.3)",
+              }}
+            />
+          )}
           {/* Gradient overlay for better text contrast */}
           <div className="absolute inset-0 bg-gradient-to-b from-black/50 via-black/70 to-black/50" />
         </div>
@@ -80,27 +112,17 @@ export default function ArtistsWithGallery() {
       <section
         id="artists"
         ref={sectionRef}
-        className={`relative py-20 bg-black text-white transition-opacity duration-1000 ${
-          isVisible ? "opacity-100" : "opacity-50"
-        }`}
+        className="relative py-10 md:py-20 bg-black text-white"
       >
         <div className="container mx-auto px-6">
           {/* Artists Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-7xl mx-auto">
             {artists.map((artist, index) => (
-              <div
-                key={artist.id}
-                className={`group transition-all duration-700 ${
-                  isVisible
-                    ? "opacity-100 translate-y-0"
-                    : "opacity-0 translate-y-8"
-                }`}
-                style={{ transitionDelay: `${index * 100}ms` }}
-              >
+              <div key={artist.id} className="group">
                 {/* Artist Card */}
                 <div className="bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition-colors duration-300 h-full flex flex-col">
                   {/* Artist Image */}
-                  <div className="relative h-64 w-full overflow-hidden">
+                  <div className="relative h-48 md:h-64 w-full overflow-hidden">
                     <Image
                       src={artist.image}
                       alt={artist.name}

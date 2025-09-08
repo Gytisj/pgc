@@ -20,9 +20,9 @@ export default function StyledButton({
   disabled = false,
 }: StyledButtonProps) {
   const sizeClasses = {
-    sm: "px-4 py-2 text-sm",
-    md: "px-8 py-4 text-lg",
-    lg: "px-12 py-4 text-xl",
+    sm: "px-3 py-2 text-sm md:px-4",
+    md: "px-6 py-3 text-base md:px-8 md:py-4 md:text-lg",
+    lg: "px-8 py-3 text-lg md:px-12 md:py-4 md:text-xl",
   };
 
   const baseClasses = `

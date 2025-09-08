@@ -29,7 +29,7 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="h-screen bg-gradient-to-b from-gray-900 to-black flex items-center"
+      className="bg-gradient-to-b from-gray-900 to-black py-16 md:py-20 mb-0"
     >
       <div className="container mx-auto px-6">
         <div
@@ -37,11 +37,11 @@ export default function ContactSection() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
           }`}
         >
-          <h2 className="pgc-header text-3xl md:text-5xl lg:text-7xl font-bold text-center mb-12 md:mb-16 tracking-wider px-4">
+          <h2 className="pgc-header text-3xl md:text-5xl lg:text-7xl font-bold text-center mb-8 md:mb-16 tracking-wider px-4">
             CONTACT
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
             <div className="space-y-8">
               <div>
                 <h3 className="text-3xl font-bold mb-8">Get in Touch</h3>

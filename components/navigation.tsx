@@ -24,7 +24,7 @@ export default function Navigation() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
         isScrolled ? "bg-black bg-opacity-90" : "bg-transparent"
       }`}
     >
@@ -92,28 +92,28 @@ export default function Navigation() {
       {/* Mobile Menu */}
       <div
         className={`md:hidden transition-all duration-300 ${
-          isMobileMenuOpen ? "opacity-100 max-h-64" : "opacity-0 max-h-0"
+          isMobileMenuOpen ? "opacity-100 max-h-40" : "opacity-0 max-h-0"
         } overflow-hidden bg-black bg-opacity-95`}
       >
-        <div className="container mx-auto px-6 py-4">
-          <div className="flex flex-col space-y-4">
+        <div className="px-6 py-2">
+          <div className="flex flex-col space-y-1">
             <Link
               href="/"
-              className="text-white hover:text-gray-300 transition-colors py-2"
+              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Home
             </Link>
             <Link
               href="/#about"
-              className="text-white hover:text-gray-300 transition-colors py-2"
+              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               About
             </Link>
             <Link
               href="/#contact"
-              className="text-white hover:text-gray-300 transition-colors py-2"
+              className="text-white hover:text-gray-300 transition-colors py-2 text-sm"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Contact

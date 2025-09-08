@@ -66,23 +66,23 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
       {/* Header Section */}
       <section
         ref={sectionRef}
-        className={`relative py-20 transition-opacity duration-1000 ${
+        className={`relative py-10 md:py-20 transition-opacity duration-1000 ${
           isVisible ? "opacity-100" : "opacity-50"
         }`}
       >
         <Navigation />
         {/* Back Button */}
-        <div className="absolute top-8 left-8 artist-gallery-back-button">
+        <div className="absolute top-4 left-4 md:top-8 md:left-8 artist-gallery-back-button z-40 pt-2.5 pl-2.5 md:pt-0 md:pl-0">
           <Link
             href="/#artists"
-            className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors group z-40"
+            className="flex items-center space-x-2 text-white/70 hover:text-white transition-colors group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
             <span className="text-sm tracking-wider">BACK TO ARTISTS</span>
           </Link>
         </div>
 
-        <div className="container mx-auto px-6">
+        <div className="container mx-auto px-6 pt-10 md:pt-20">
           {/* Artist Image */}
           <div
             className={`text-center mb-12 transition-all duration-1000 ${
@@ -91,7 +91,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                 : "opacity-0 translate-y-8"
             }`}
           >
-            <div className="w-48 h-48 md:w-64 md:h-64 mx-auto mb-8 relative">
+            <div className="w-32 h-32 md:w-48 md:h-48 lg:w-64 lg:h-64 mx-auto mb-6 md:mb-8 relative">
               <Image
                 src={artist.image}
                 alt={artist.name}
@@ -105,11 +105,11 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               <div className="absolute inset-0 rounded-full border-4 border-white/20" />
             </div>
 
-            <h1 className="pgc-header text-4xl md:text-6xl font-bold mb-4 tracking-wider">
+            <h1 className="pgc-header text-2xl md:text-4xl lg:text-6xl font-bold mb-4 tracking-wider">
               {artist.name}
             </h1>
 
-            <p className="text-xl text-gray-300 max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto px-4">
               {artist.description}
             </p>
           </div>

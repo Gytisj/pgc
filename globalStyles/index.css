@@ -4,4 +4,8 @@ html {
 
 .artist-gallery-back-button {
   z-index: 1000;
+
+  @media (max-width: 768px) {
+    margin-top: 12px;
+  }
 }

@@ -32,14 +32,14 @@ export default function AppointmentSection() {
   return (
     <section
       ref={sectionRef}
-      className={`relative py-20 bg-black text-white transition-opacity duration-1000 ${
+      className={`relative py-10 md:py-20 bg-black text-white transition-opacity duration-1000 ${
         isVisible ? "opacity-100" : "opacity-50"
       }`}
       id="appointment"
     >
       <div className="container mx-auto px-6">
         {/* Make An Appointment Button */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-8 md:mb-16">
           <StyledButton
             size="lg"
             onClick={() => {
@@ -52,7 +52,7 @@ export default function AppointmentSection() {
         </div>
 
         {/* Three Column Layout */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-12 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12 max-w-6xl mx-auto">
           {/* Location Column */}
           <div
             className={`transition-all duration-700 ${

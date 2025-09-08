@@ -1,11 +1,30 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import tattooUpclose from "./assets/tattoo-upclose.jpg";
 import Image from "next/image";
 import pgcLogo from "./assets/pgc.jpg";
 
 export default function ParallaxSection() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile device
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(
+        window.innerWidth < 768 ||
+          /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+            navigator.userAgent
+          )
+      );
+    };
+
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
+
   // Preload the image for better performance
   useEffect(() => {
     const img = document.createElement("img");
@@ -17,17 +36,31 @@ export default function ParallaxSection() {
     typeof tattooUpclose === "string" ? tattooUpclose : tattooUpclose.src;
 
   return (
-    <section className="relative h-screen overflow-hidden flex items-center justify-center">
+    <section className="relative h-[60vh] md:h-[80vh] overflow-hidden flex items-center justify-center">
       {/* Background Image with fixed attachment */}
       <div className="absolute inset-0 w-full h-full">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{
-            backgroundImage: `url(${imageSrc})`,
-            backgroundPosition: "center 30%",
-            filter: "brightness(0.7) contrast(1.2)",
-          }}
-        />
+        {isMobile ? (
+          <Image
+            src={tattooUpclose}
+            alt="Background"
+            fill
+            className="object-cover"
+            style={{
+              filter: "brightness(0.7) contrast(1.2)",
+              objectPosition: "center 30%",
+            }}
+            priority
+          />
+        ) : (
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
+            style={{
+              backgroundImage: `url(${imageSrc})`,
+              backgroundPosition: "center 30%",
+              filter: "brightness(0.7) contrast(1.2)",
+            }}
+          />
+        )}
         {/* Gradient overlay for better text contrast */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black/40" />
       </div>
