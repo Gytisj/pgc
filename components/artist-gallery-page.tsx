@@ -16,6 +16,8 @@ interface ArtistGalleryPageProps {
 export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedImage, setSelectedImage] = useState<number | null>(null);
+  const [touchStart, setTouchStart] = useState<number | null>(null);
+  const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const sectionRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
@@ -64,6 +66,33 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
   }, [selectedImage, nextImage, prevImage, closeLightbox]);
+
+  // Touch swipe detection
+  const minSwipeDistance = 50;
+
+  const onTouchStart = (e: React.TouchEvent) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const onTouchMove = (e: React.TouchEvent) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > minSwipeDistance;
+    const isRightSwipe = distance < -minSwipeDistance;
+
+    if (isLeftSwipe && selectedImage !== null) {
+      nextImage();
+    }
+    if (isRightSwipe && selectedImage !== null) {
+      prevImage();
+    }
+  };
 
   // Cleanup effect to ensure body scroll is restored on unmount
   useEffect(() => {
@@ -202,32 +231,50 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
       {/* Lightbox */}
       {selectedImage !== null && (
-        <div className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center overflow-hidden">
+        <div
+          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center overflow-hidden"
+          onTouchStart={onTouchStart}
+          onTouchMove={onTouchMove}
+          onTouchEnd={onTouchEnd}
+          onClick={closeLightbox}
+        >
           {/* Close Button */}
           <button
-            onClick={closeLightbox}
-            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              closeLightbox();
+            }}
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
           >
-            <X className="w-6 h-6 md:w-8 md:h-8" />
+            <X className="w-8 h-8 md:w-8 md:h-8" />
           </button>
 
           {/* Navigation Arrows */}
           <button
-            onClick={prevImage}
-            className="absolute left-4 md:left-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              prevImage();
+            }}
+            className="absolute left-4 md:left-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
           >
             <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
           </button>
 
           <button
-            onClick={nextImage}
-            className="absolute right-4 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-2 md:p-0"
+            onClick={(e) => {
+              e.stopPropagation();
+              nextImage();
+            }}
+            className="absolute right-4 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
           >
             <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
           </button>
 
           {/* Image */}
-          <div className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center">
+          <div
+            className="relative max-w-[90vw] max-h-[90vh] w-full h-full flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
             <Image
               src={artist.galleryImages[selectedImage]}
               alt={`${artist.name} work ${selectedImage + 1}`}
