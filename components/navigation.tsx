@@ -44,7 +44,7 @@ export default function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
-        isScrolled ? "bg-pgc-black/90 backdrop-blur-sm" : "bg-transparent"
+        isScrolled ? "bg-pgc-green/95 backdrop-blur-sm border-b border-pgc-brown/30" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4">
@@ -80,7 +80,7 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-pgc-white hover:text-pgc-300 transition-colors duration-300 text-sm uppercase tracking-wider"
+                  className="text-pgc-white hover:text-pgc-cream transition-colors duration-300 text-sm uppercase tracking-wider"
                 >
                   {link.label}
                 </Link>
@@ -121,7 +121,7 @@ export default function Navigation() {
       >
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-4 right-8 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3"
+          className="absolute top-4 right-8 text-pgc-white hover:text-pgc-cream transition-colors duration-300 z-60 p-3"
         >
           <X className="w-8 h-8" />
         </button>
@@ -137,7 +137,7 @@ export default function Navigation() {
               className={`block transition-all duration-300 tracking-wider hover:scale-110 ${
                 link.label === "Book Now"
                   ? "bg-pgc-white text-pgc-black px-8 py-3 rounded-full text-xl font-bold uppercase hover:bg-gray-100"
-                  : "text-pgc-white text-3xl font-light uppercase hover:text-pgc-300"
+                  : "text-pgc-white text-3xl font-light uppercase hover:text-pgc-cream"
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >

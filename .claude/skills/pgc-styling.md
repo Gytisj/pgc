@@ -1,56 +1,73 @@
 # PGC Styling Guide
 
-Mandatory design system for Pain Game Club website. Apply these rules when writing or modifying any UI component, page, or style in this project. Inspired by luxury tattoo studio aesthetics (Bang Bang NYC reference).
+Mandatory design system for Pain Game Club website. Apply these rules when writing or modifying any UI component, page, or style in this project. Based on the official PGC brand style guide (GO&DO studija, 2026).
 
 ---
 
 ## Core Philosophy
 
-**Luxury minimalism.** Dark, editorial, gallery-like. Let photos do the talking. Minimal text, maximum whitespace, high contrast. Every element earns its place.
+**Raw street culture meets tattoo artistry.** Dark, authentic, graffiti-inspired. Photography-driven with B&W flash aesthetic. Spontaneous energy, not corporate polish. The brand draws from street art, body art, and underground culture.
 
 ---
 
 ## Color Palette
 
-| Token | Value | Usage |
-|---|---|---|
-| `--pgc-black` | `#151515` | Primary background |
-| `--pgc-black-deep` | `#0a0a0a` | Deeper sections, footers |
-| `--pgc-gray-900` | `#1c1c1c` | Cards, elevated surfaces |
-| `--pgc-gray-800` | `#222222` | Borders, subtle dividers |
-| `--pgc-gray-700` | `#333333` | Muted UI elements |
-| `--pgc-gray-400` | `#999999` | Secondary/caption text |
-| `--pgc-gray-300` | `#bbbbbb` | Body text on dark bg |
-| `--pgc-white` | `#ffffff` | Headings, primary text, CTAs |
-| `--pgc-gold` | `#c9a96e` | Optional accent (sparing use only) |
+### Primary Colors
 
-**Rules:**
-- Background is ALWAYS dark (`#151515` or `#0a0a0a`). Never use light/white backgrounds.
-- Text is ALWAYS light on dark. Primary text `#ffffff`, body text `#bbbbbb`, captions `#999999`.
-- No bright accent colors. If color is needed, use `--pgc-gold` sparingly for one element per section max.
-- Image overlays: `rgba(18, 18, 18, 0.5)` for hover states, `rgba(0, 0, 0, 0.4)` for gradient overlays on hero images.
+| Token | Tailwind | Hex | Usage |
+|---|---|---|---|
+| Black | `pgc-black` | `#000000` | Primary background |
+| White | `pgc-white` | `#ffffff` | Headings, primary text, CTAs |
+
+### Brand Accent Colors
+
+| Token | Tailwind | Hex | Usage |
+|---|---|---|---|
+| Bright Red | `pgc-red` | `#ff2222` | Highlight accent (sparing — max 1 per section) |
+| Copper | `pgc-copper` | `#cd5e1f` | Warm accent, hover highlights |
+| Pink | `pgc-pink` | `#fdc1db` | Soft accent, decorative |
+| Dark Green | `pgc-green` | `#02190e` | Deep dark surfaces, alternative dark bg |
+| Dark Brown | `pgc-brown` | `#49241c` | Cards, borders, elevated surfaces, tags |
+| Cream | `pgc-cream` | `#eae6e2` | Body text, soft white alternative |
+
+### Color Usage Rules
+
+- **Backgrounds:** `bg-pgc-black` for sections. Sections are transparent by default (body has a background image pattern). Use `bg-pgc-black` only on hero and overlay elements.
+- **Text hierarchy:** `text-pgc-white` for headings, `text-pgc-cream` for body text, `text-pgc-cream/60` for captions/labels.
+- **Cards & surfaces:** `bg-pgc-brown` solid or `bg-pgc-brown/50 backdrop-blur-sm` for glass effect.
+- **Borders & dividers:** `border-pgc-brown/50`.
+- **Tags/badges:** `bg-pgc-brown/80 text-pgc-cream`.
+- **Form inputs:** `bg-pgc-black border-pgc-brown/50 text-pgc-white placeholder-pgc-brown`.
+- **Image overlays:** `rgba(0, 0, 0, 0.4)` for hero darkening, `bg-gradient-to-t from-black/80 via-transparent to-transparent` on image cards.
+- **Accent colors** (`pgc-red`, `pgc-copper`, `pgc-pink`) should be used sparingly — max one accent per section, primarily for highlights or interactive states.
 
 ---
 
 ## Typography
 
-**Font Stack:** `'Inter', -apple-system, BlinkMacSystemFont, sans-serif` (loaded via `next/font/google`).
+**Font Families:**
+- **Archivo Black** (`font-display` / `.pgc-header`) — Headlines, section titles, hero text. Bold, impactful.
+- **Outfit** (`font-sans`) — Body text, labels, UI elements. Clean, modern. Use Medium weight (~500) for body blocks.
+- **Cedarville Cursive** (`font-handwriting`) — Handwritten accent text. Use sparingly for quotes, artist statements, decorative text. Gives raw/personal feel.
 
-| Element | Size (mobile → desktop) | Weight | Letter-spacing | Transform |
-|---|---|---|---|---|
-| Hero H1 | `text-3xl` → `text-6xl` | `font-bold` (700) | `tracking-wider` (0.05em) | None |
-| Section H2 | `text-3xl` → `text-5xl` | `font-bold` (700) | `tracking-wider` | `uppercase` |
-| Subsection H3 | `text-xl` → `text-2xl` | `font-bold` (700) | `tracking-wider` | `uppercase` |
-| Body | `text-base` → `text-lg` | `font-normal` (400) | Normal | None |
-| Caption/label | `text-xs` → `text-sm` | `font-semibold` (600) | `tracking-[0.2em]` | `uppercase` |
-| Button text | `text-sm` → `text-lg` | `font-bold` (700) | `tracking-wider` | `uppercase` |
+All loaded via `next/font/google` with CSS variables: `--font-archivo-black`, `--font-outfit`, `--font-cedarville`.
+
+| Element | Font | Size (mobile → desktop) | Weight | Letter-spacing | Transform |
+|---|---|---|---|---|---|
+| Hero H1 | Archivo Black | `text-3xl` → `text-6xl` | 400 (only weight) | `tracking-wider` | None |
+| Section H2 | Archivo Black | `text-3xl` → `text-5xl` | 400 | `tracking-wider` | `uppercase` |
+| Subsection H3 | Archivo Black | `text-xl` → `text-2xl` | 400 | `tracking-wider` | `uppercase` |
+| Body | Outfit | `text-base` → `text-lg` | `font-medium` (500) | Normal | None |
+| Caption/label | Outfit | `text-xs` → `text-sm` | `font-semibold` (600) | `tracking-[0.2em]` | `uppercase` |
+| Button text | Outfit | `text-sm` → `text-lg` | `font-bold` (700) | `tracking-wider` | `uppercase` |
+| Handwriting accent | Cedarville Cursive | `text-lg` → `text-2xl` | 400 | Normal | None |
 
 **Rules:**
-- ALL section headings are `uppercase` with `tracking-wider`.
-- Use the `.pgc-header` class on all H1/H2 elements.
-- Body text line-height: `leading-relaxed` (1.625).
+- ALL section headings use `.pgc-header` class (Archivo Black via CSS).
+- Body text: `font-medium leading-relaxed` (Outfit 500).
+- Handwriting font (`font-handwriting`) for accents only — never for UI or navigation.
 - Never use font sizes smaller than `text-xs` (12px).
-- Avoid long paragraphs. Max 2-3 sentences per text block. Let images and whitespace breathe.
+- Avoid long paragraphs. Max 2-3 sentences per text block.
 
 ---
 
@@ -87,7 +104,7 @@ Mandatory design system for Pain Game Club website. Apply these rules when writi
 
 **Primary CTA (white pill):**
 ```
-bg-white text-black font-bold px-8 py-4 rounded-full text-lg
+bg-pgc-white text-pgc-black font-bold px-8 py-4 rounded-full text-lg uppercase
 hover:bg-gray-100 hover:scale-105 transition-all duration-300
 tracking-wider shadow-2xl
 ```
@@ -95,13 +112,13 @@ Box-shadow: `0 0 30px rgba(255,255,255,0.3), 0 0 60px rgba(255,255,255,0.1)` (wh
 
 **Secondary (ghost pill):**
 ```
-border border-white/30 text-white px-8 py-4 rounded-full
+border border-white/30 text-pgc-white px-8 py-4 rounded-full uppercase
 hover:bg-white/10 transition-all duration-300 tracking-wider
 ```
 
 **Small CTA:**
 ```
-bg-white text-black font-bold px-5 py-2 rounded-full text-sm
+bg-pgc-white text-pgc-black font-bold px-5 py-2 rounded-full text-sm uppercase
 tracking-wider hover:bg-gray-100 transition-colors
 ```
 
@@ -114,9 +131,9 @@ tracking-wider hover:bg-gray-100 transition-colors
 
 ### Cards
 
-**Surface:** `bg-gray-900 rounded-lg overflow-hidden`
-**Hover:** `hover:bg-gray-800 transition-colors duration-300`
-**Glass effect (reviews, bios):** `bg-gray-900/50 backdrop-blur-sm rounded-lg`
+**Surface:** `bg-pgc-brown rounded-lg overflow-hidden`
+**Hover:** `hover:bg-pgc-brown/80 transition-colors duration-300`
+**Glass effect (reviews, bios):** `bg-pgc-brown/50 backdrop-blur-sm rounded-lg`
 
 ### Image Containers
 
@@ -134,7 +151,7 @@ With overlay: `bg-gradient-to-t from-black/80 via-transparent to-transparent`
 ### Navigation
 
 - Fixed top: `fixed top-0 left-0 right-0 z-30`
-- Transparent initially, solid on scroll: `bg-black bg-opacity-90`
+- Transparent initially, solid on scroll: `bg-pgc-black/90 backdrop-blur-sm`
 - Logo appears on scroll with scale transition
 - "Book Now" button in nav is the small CTA style (white pill)
 - Mobile: fullscreen black overlay menu with large centered links
@@ -142,7 +159,7 @@ With overlay: `bg-gradient-to-t from-black/80 via-transparent to-transparent`
 ### Tags/Badges
 
 ```
-text-xs px-3 py-1 bg-gray-800 rounded-full text-gray-300
+text-xs px-3 py-1 bg-pgc-brown/80 rounded-full text-pgc-cream
 ```
 
 ### Stars (ratings)
@@ -186,8 +203,8 @@ Stagger children: `style={{ transitionDelay: '${index * 100}ms' }}`
 
 - Images: `group-hover:scale-105` or `group-hover:scale-110` with `duration-500`
 - Buttons: `hover:scale-105 transition-all duration-300`
-- Links: `hover:text-gray-300 transition-colors`
-- Cards: `hover:bg-gray-800 transition-colors duration-300`
+- Links: `hover:text-pgc-cream transition-colors`
+- Cards: `hover:bg-pgc-brown/80 transition-colors duration-300`
 
 ### Duration Scale
 
@@ -245,12 +262,12 @@ useEffect(() => {
 ## Do NOT
 
 - Use light/white backgrounds on any page or section
-- Use bright colors (red, blue, green) as accents
+- Use generic Tailwind grays (`bg-gray-900`, `text-gray-300`, etc.) — always use `pgc-*` tokens
 - Use squared buttons or sharp corners on interactive elements
 - Write paragraphs longer than 3 sentences
 - Use inline styles when Tailwind classes exist
 - Add decorative elements that don't serve a purpose
-- Use `text-gray-500` or lighter for body text (too low contrast)
+- Use accent colors (`pgc-red`, `pgc-copper`, `pgc-pink`) as backgrounds — they are highlights only
 - Hardcode pixel values when Tailwind spacing scale works
 - Forget `"use client"` on components with useState/useEffect
 - Create components without scroll-reveal animations

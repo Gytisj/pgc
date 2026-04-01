@@ -26,7 +26,7 @@ export default function ContactSection() {
     <section
       id="contact"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black-deep"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div
@@ -51,7 +51,7 @@ export default function ContactSection() {
                 <h3 className="text-xl md:text-2xl font-bold mb-4 uppercase tracking-wider text-pgc-white">
                   Get in Touch
                 </h3>
-                <p className="text-base text-pgc-300 mb-8 leading-relaxed">
+                <p className="text-base text-pgc-cream mb-8 leading-relaxed">
                   Ready to start your tattoo journey? Book a consultation and
                   let&apos;s create something extraordinary together.
                 </p>
@@ -59,14 +59,14 @@ export default function ContactSection() {
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <Mail className="w-5 h-5 text-pgc-400" />
+                  <Mail className="w-5 h-5 text-pgc-cream/60" />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-cream/60 mb-1">
                       Email
                     </p>
                     <a
                       href="mailto:info@paingameclub.lt"
-                      className="text-pgc-white hover:text-pgc-300 transition-colors duration-300"
+                      className="text-pgc-white hover:text-pgc-cream transition-colors duration-300"
                     >
                       info@paingameclub.lt
                     </a>
@@ -74,28 +74,28 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <MapPin className="w-5 h-5 text-pgc-400" />
+                  <MapPin className="w-5 h-5 text-pgc-cream/60" />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-cream/60 mb-1">
                       Location
                     </p>
-                    <p className="text-pgc-300">
+                    <p className="text-pgc-cream">
                       Algirdo g. 38, Vilnius, Lithuania 03806
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <Instagram className="w-5 h-5 text-pgc-400" />
+                  <Instagram className="w-5 h-5 text-pgc-cream/60" />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-cream/60 mb-1">
                       Instagram
                     </p>
                     <a
                       href="https://instagram.com/pain_game_club"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-pgc-white hover:text-pgc-300 transition-colors duration-300"
+                      className="text-pgc-white hover:text-pgc-cream transition-colors duration-300"
                     >
                       @pain_game_club
                     </a>
@@ -103,19 +103,19 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <Clock className="w-5 h-5 text-pgc-400" />
+                  <Clock className="w-5 h-5 text-pgc-cream/60" />
                   <div>
-                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-cream/60 mb-1">
                       Hours
                     </p>
-                    <p className="text-pgc-300">By appointment only</p>
+                    <p className="text-pgc-cream">By appointment only</p>
                   </div>
                 </div>
               </div>
             </div>
 
             <div
-              className={`bg-pgc-900/50 backdrop-blur-sm p-8 rounded-lg transition-all duration-700 ${
+              className={`bg-pgc-brown/50 backdrop-blur-sm p-8 rounded-lg transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -129,17 +129,17 @@ export default function ContactSection() {
                 <input
                   type="text"
                   placeholder="Your Name"
-                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700"
+                  className="w-full p-4 bg-pgc-black border border-pgc-brown/50 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-brown"
                 />
                 <input
                   type="email"
                   placeholder="Your Email"
-                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700"
+                  className="w-full p-4 bg-pgc-black border border-pgc-brown/50 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-brown"
                 />
                 <textarea
                   placeholder="Your message..."
                   rows={4}
-                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700 resize-none"
+                  className="w-full p-4 bg-pgc-black border border-pgc-brown/50 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-brown resize-none"
                 />
                 <button
                   type="submit"
@@ -148,11 +148,11 @@ export default function ContactSection() {
                   Send Message
                 </button>
               </form>
-              <p className="text-pgc-400 text-xs mt-4 text-center">
+              <p className="text-pgc-cream/60 text-xs mt-4 text-center">
                 Or{" "}
                 <Link
                   href="/booking"
-                  className="text-pgc-white underline hover:text-pgc-300 transition-colors duration-300"
+                  className="text-pgc-white underline hover:text-pgc-cream transition-colors duration-300"
                 >
                   book a full consultation
                 </Link>{" "}

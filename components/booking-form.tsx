@@ -16,7 +16,7 @@ export default function BookingForm() {
 
   if (submitted) {
     return (
-      <section className="pt-32 pb-20 px-6 bg-pgc-black">
+      <section className="pt-32 pb-20 px-6">
         <div className="max-w-2xl mx-auto text-center">
           <div className="w-20 h-20 bg-pgc-white rounded-full flex items-center justify-center mx-auto mb-6">
             <svg
@@ -36,7 +36,7 @@ export default function BookingForm() {
           <h1 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
             Thank You!
           </h1>
-          <p className="text-pgc-300 text-base md:text-lg mb-8 leading-relaxed">
+          <p className="text-pgc-cream text-base md:text-lg mb-8 leading-relaxed">
             We&apos;ve received your consultation request. We&apos;ll get back
             to you within 24 hours.
           </p>
@@ -52,16 +52,16 @@ export default function BookingForm() {
   }
 
   const inputClass =
-    "w-full p-4 bg-pgc-black-deep border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700";
+    "w-full p-4 bg-pgc-black-deep border border-pgc-brown/50 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-brown";
 
   return (
-    <section className="pt-32 pb-20 px-6 bg-pgc-black">
+    <section className="pt-32 pb-20 px-6">
       <div className="max-w-2xl mx-auto">
         <div className="text-center mb-12">
           <h1 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
             Book a Consultation
           </h1>
-          <p className="text-pgc-400 text-base md:text-lg leading-relaxed">
+          <p className="text-pgc-cream/60 text-base md:text-lg leading-relaxed">
             Tell us about your tattoo idea and we&apos;ll match you with the
             perfect artist. Free consultation, no commitment.
           </p>
@@ -69,7 +69,7 @@ export default function BookingForm() {
 
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Your Name *
             </label>
             <input
@@ -81,7 +81,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Email *
             </label>
             <input
@@ -93,7 +93,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Phone
             </label>
             <input
@@ -104,7 +104,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Preferred Artist
             </label>
             <select className={`${inputClass} appearance-none`}>
@@ -118,7 +118,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Placement
             </label>
             <input
@@ -129,7 +129,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Approximate Size
             </label>
             <select className={`${inputClass} appearance-none`}>
@@ -142,7 +142,7 @@ export default function BookingForm() {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-400">
+            <label className="block text-xs font-semibold mb-2 uppercase tracking-[0.2em] text-pgc-cream/60">
               Describe Your Tattoo Idea *
             </label>
             <textarea
@@ -153,11 +153,11 @@ export default function BookingForm() {
             />
           </div>
 
-          <p className="text-pgc-400 text-xs">
+          <p className="text-pgc-cream/60 text-xs">
             Have reference images? Send them to{" "}
             <a
               href="mailto:info@paingameclub.lt"
-              className="text-pgc-white hover:text-pgc-300 underline transition-colors duration-300"
+              className="text-pgc-white hover:text-pgc-cream underline transition-colors duration-300"
             >
               info@paingameclub.lt
             </a>{" "}

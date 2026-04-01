@@ -1,5 +1,6 @@
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
+import HeroWaveDivider from "@/components/hero-wave-divider";
 import TrustIndicators from "@/components/trust-indicators";
 import PortfolioShowcase from "@/components/portfolio-showcase";
 import ProcessSection from "@/components/process-section";
@@ -15,9 +16,10 @@ import "@/globalStyles/index.css";
 
 export default function Home() {
   return (
-    <main className="bg-pgc-black text-pgc-white">
+    <main className="text-pgc-white font-medium">
       <Navigation />
       <HeroSection />
+      <HeroWaveDivider />
       <TrustIndicators />
       <PortfolioShowcase />
       <ProcessSection />

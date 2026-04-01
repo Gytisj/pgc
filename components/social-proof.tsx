@@ -49,7 +49,7 @@ export default function SocialProof() {
     <section
       id="reviews"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black-deep"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div
@@ -68,7 +68,7 @@ export default function SocialProof() {
               />
             ))}
           </div>
-          <p className="text-pgc-400 text-sm">200+ five-star reviews</p>
+          <p className="text-pgc-cream/60 text-sm">200+ five-star reviews</p>
         </div>
 
         {/* Desktop: 3 cards */}
@@ -76,7 +76,7 @@ export default function SocialProof() {
           {getVisibleTestimonials().map((testimonial, index) => (
             <div
               key={`${testimonial.name}-${index}`}
-              className={`bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6 md:p-8 transition-all duration-700 ${
+              className={`bg-pgc-brown/50 backdrop-blur-sm rounded-lg p-6 md:p-8 transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -91,14 +91,14 @@ export default function SocialProof() {
                   />
                 ))}
               </div>
-              <p className="text-pgc-300 leading-relaxed mb-4 text-sm">
+              <p className="text-pgc-cream leading-relaxed mb-4 text-sm">
                 &ldquo;{testimonial.text}&rdquo;
               </p>
-              <div className="border-t border-pgc-800 pt-4">
+              <div className="border-t border-pgc-brown/50 pt-4">
                 <p className="font-semibold text-pgc-white text-sm">
                   {testimonial.name}
                 </p>
-                <p className="text-xs text-pgc-400">
+                <p className="text-xs text-pgc-cream/60">
                   {testimonial.tattooStyle} by {testimonial.artistName}
                 </p>
               </div>
@@ -109,7 +109,7 @@ export default function SocialProof() {
         {/* Mobile: single card with nav */}
         <div className="md:hidden">
           <div
-            className={`bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 ${
+            className={`bg-pgc-brown/50 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -123,14 +123,14 @@ export default function SocialProof() {
                 />
               ))}
             </div>
-            <p className="text-pgc-300 leading-relaxed mb-4">
+            <p className="text-pgc-cream leading-relaxed mb-4">
               &ldquo;{testimonials[currentIndex].text}&rdquo;
             </p>
-            <div className="border-t border-pgc-800 pt-4">
+            <div className="border-t border-pgc-brown/50 pt-4">
               <p className="font-semibold text-pgc-white">
                 {testimonials[currentIndex].name}
               </p>
-              <p className="text-xs text-pgc-400">
+              <p className="text-xs text-pgc-cream/60">
                 {testimonials[currentIndex].tattooStyle} by{" "}
                 {testimonials[currentIndex].artistName}
               </p>
@@ -140,7 +140,7 @@ export default function SocialProof() {
           <div className="flex justify-center items-center gap-6 mt-6">
             <button
               onClick={prev}
-              className="w-11 h-11 rounded-full bg-pgc-800 flex items-center justify-center hover:bg-pgc-700 transition-colors duration-300"
+              className="w-11 h-11 rounded-full bg-pgc-brown/80 flex items-center justify-center hover:bg-pgc-brown transition-colors duration-300"
             >
               <ChevronLeft className="w-5 h-5 text-pgc-white" />
             </button>
@@ -150,14 +150,14 @@ export default function SocialProof() {
                   key={i}
                   onClick={() => setCurrentIndex(i)}
                   className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
-                    i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-700"
+                    i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-brown"
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="w-11 h-11 rounded-full bg-pgc-800 flex items-center justify-center hover:bg-pgc-700 transition-colors duration-300"
+              className="w-11 h-11 rounded-full bg-pgc-brown/80 flex items-center justify-center hover:bg-pgc-brown transition-colors duration-300"
             >
               <ChevronRight className="w-5 h-5 text-pgc-white" />
             </button>
@@ -171,7 +171,7 @@ export default function SocialProof() {
               key={i}
               onClick={() => setCurrentIndex(i)}
               className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-700"
+                i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-brown"
               }`}
             />
           ))}

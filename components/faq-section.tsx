@@ -58,16 +58,16 @@ function FaqItem({
   onClick: () => void;
 }) {
   return (
-    <div className="border-b border-pgc-800">
+    <div className="border-b border-pgc-brown/50">
       <button
         onClick={onClick}
         className="w-full flex items-center justify-between py-5 text-left group"
       >
-        <span className="text-base md:text-lg font-semibold pr-4 text-pgc-white group-hover:text-pgc-300 transition-colors duration-300">
+        <span className="text-base md:text-lg font-semibold pr-4 text-pgc-white group-hover:text-pgc-cream transition-colors duration-300">
           {question}
         </span>
         <ChevronDown
-          className={`w-5 h-5 flex-shrink-0 text-pgc-400 transition-transform duration-300 ${
+          className={`w-5 h-5 flex-shrink-0 text-pgc-cream/60 transition-transform duration-300 ${
             isOpen ? "rotate-180" : ""
           }`}
         />
@@ -77,7 +77,7 @@ function FaqItem({
           isOpen ? "max-h-96 pb-5" : "max-h-0"
         }`}
       >
-        <p className="text-pgc-300 leading-relaxed">{answer}</p>
+        <p className="text-pgc-cream leading-relaxed">{answer}</p>
       </div>
     </div>
   );
@@ -106,7 +106,7 @@ export default function FaqSection() {
     <section
       id="faq"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div
@@ -117,7 +117,7 @@ export default function FaqSection() {
           <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
             FAQ
           </h2>
-          <p className="text-pgc-400 text-base md:text-lg leading-relaxed">
+          <p className="text-pgc-cream/60 text-base md:text-lg leading-relaxed">
             Everything you need to know before your visit.
           </p>
         </div>

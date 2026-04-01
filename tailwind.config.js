@@ -7,17 +7,21 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ["var(--font-outfit)", "system-ui", "sans-serif"],
+        display: ["var(--font-archivo-black)", "system-ui", "sans-serif"],
+        handwriting: ["var(--font-cedarville)", "cursive"],
+      },
       colors: {
         pgc: {
-          black: "#151515",
-          "black-deep": "#0a0a0a",
-          900: "#1c1c1c",
-          800: "#222222",
-          700: "#333333",
-          400: "#999999",
-          300: "#bbbbbb",
+          black: "#000000",
           white: "#ffffff",
-          gold: "#c9a96e",
+          cream: "#eae6e2",
+          red: "#ff2222",
+          copper: "#cd5e1f",
+          pink: "#fdc1db",
+          green: "#02190e",
+          brown: "#49241c",
         },
       },
       transitionDuration: {

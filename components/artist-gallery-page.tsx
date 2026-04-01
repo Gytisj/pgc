@@ -86,7 +86,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-pgc-black text-pgc-white overflow-x-hidden">
+    <div className="min-h-screen text-pgc-white overflow-x-hidden">
       <Navigation />
 
       <section
@@ -99,7 +99,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
         <div className="container mx-auto px-6 mb-8">
           <Link
             href="/#artists"
-            className="inline-flex items-center gap-2 text-pgc-400 hover:text-pgc-white transition-colors duration-300 group"
+            className="inline-flex items-center gap-2 text-pgc-cream/60 hover:text-pgc-white transition-colors duration-300 group"
           >
             <ArrowLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
             <span className="text-xs uppercase tracking-[0.2em] font-semibold">
@@ -134,7 +134,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
             {/* Artist Info */}
             <div className="text-center md:text-left flex-1">
-              <p className="text-xs uppercase tracking-[0.2em] text-pgc-400 mb-2 font-semibold">
+              <p className="text-xs uppercase tracking-[0.2em] text-pgc-cream/60 mb-2 font-semibold">
                 {artist.specialization}
               </p>
               <h1 className="pgc-header text-3xl md:text-5xl font-bold mb-4 tracking-wider text-pgc-white">
@@ -146,19 +146,19 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                 {artist.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 bg-pgc-800 rounded-full text-pgc-300"
+                    className="text-xs px-3 py-1 bg-pgc-brown/80 rounded-full text-pgc-cream"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <p className="text-pgc-300 text-base md:text-lg leading-relaxed max-w-2xl mb-6">
+              <p className="text-pgc-cream text-base md:text-lg leading-relaxed max-w-2xl mb-6">
                 {artist.description}
               </p>
 
               {artist.instagram && (
-                <p className="text-pgc-400 text-xs uppercase tracking-[0.2em] mb-6">
+                <p className="text-pgc-cream/60 text-xs uppercase tracking-[0.2em] mb-6">
                   Instagram:{" "}
                   <span className="text-pgc-white">{artist.instagram}</span>
                 </p>
@@ -186,11 +186,11 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="bg-pgc-900/50 backdrop-blur-sm rounded-lg p-8 md:p-12">
+            <div className="bg-pgc-brown/50 backdrop-blur-sm rounded-lg p-8 md:p-12">
               <h2 className="text-xl md:text-2xl font-bold mb-4 text-center uppercase tracking-wider text-pgc-white">
                 About the Artist
               </h2>
-              <p className="text-pgc-300 leading-relaxed text-center">
+              <p className="text-pgc-cream leading-relaxed text-center">
                 {artist.bio}
               </p>
             </div>
@@ -246,7 +246,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                 {artist.reviews.map((review, index) => (
                   <div
                     key={index}
-                    className="bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6"
+                    className="bg-pgc-brown/50 backdrop-blur-sm rounded-lg p-6"
                   >
                     <div className="flex mb-3">
                       {[...Array(review.rating)].map((_, i) => (
@@ -256,7 +256,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                         />
                       ))}
                     </div>
-                    <p className="text-pgc-300 leading-relaxed mb-4 text-sm">
+                    <p className="text-pgc-cream leading-relaxed mb-4 text-sm">
                       &ldquo;{review.text}&rdquo;
                     </p>
                     <p className="font-semibold text-pgc-white text-sm">
@@ -300,7 +300,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               closeLightbox();
             }}
-            className="absolute top-4 right-4 md:top-6 md:right-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-pgc-white hover:text-pgc-cream transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <X className="w-8 h-8" />
           </button>
@@ -310,7 +310,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               prevImage();
             }}
-            className="absolute left-4 md:left-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
+            className="absolute left-4 md:left-6 text-pgc-white hover:text-pgc-cream transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
           </button>
@@ -320,7 +320,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               nextImage();
             }}
-            className="absolute right-4 md:right-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
+            className="absolute right-4 md:right-6 text-pgc-white hover:text-pgc-cream transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
           </button>

@@ -3,9 +3,63 @@
 @tailwind utilities;
 
 body {
-  font-family: "Inter", sans-serif;
-  background-color: #151515;
+  font-family: var(--font-outfit), system-ui, sans-serif;
+  background-color: #000000;
   color: #ffffff;
+}
+
+.pgc-header {
+  font-family: var(--font-archivo-black), system-ui, sans-serif;
+}
+
+.font-handwriting {
+  font-family: var(--font-cedarville), cursive;
+}
+
+@media (max-width: 767px) {
+  body {
+    background-image: url("/images/mobile-bg.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-color: transparent;
+  }
+}
+
+@media (min-width: 768px) {
+  body {
+    background-image: url("/images/desktop-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+    background-color: transparent;
+  }
+}
+
+.hero-wave-cover {
+  background-color: #000000;
+}
+
+@media (max-width: 767px) {
+  .hero-wave-cover {
+    background-image: url("/images/mobile-bg.jpeg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+  }
+}
+
+@media (min-width: 768px) {
+  .hero-wave-cover {
+    background-image: url("/images/desktop-bg.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center top;
+    background-attachment: fixed;
+  }
 }
 
 @layer utilities {
@@ -18,7 +72,7 @@ body {
 }
 
 h2 {
-  font-weight: 700 !important;
+  font-family: var(--font-archivo-black), system-ui, sans-serif;
 }
 
 /* Mobile-specific improvements */
