@@ -9,17 +9,9 @@ body {
 
 /* Hide scrollbar for carousel */
 .scrollbar-hide {
-  -ms-overflow-style: none; /* Internet Explorer 10+ */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 .scrollbar-hide::-webkit-scrollbar {
-  display: none; /* Safari and Chrome */
-}
-
-.artist-gallery-back-button {
-  z-index: 1000;
-
-  @media (max-width: 768px) {
-    margin-top: 12px;
-  }
+  display: none;
 }

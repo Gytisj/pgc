@@ -17,7 +17,6 @@ export default function ArtistsWithGallery() {
       },
       { threshold: 0.1 }
     );
-
     const ref = sectionRef.current;
     if (ref) observer.observe(ref);
     return () => {
@@ -29,7 +28,7 @@ export default function ArtistsWithGallery() {
     <section
       id="artists"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-black text-white"
+      className="py-16 md:py-24 bg-pgc-black"
     >
       <div className="container mx-auto px-6">
         <div
@@ -37,10 +36,10 @@ export default function ArtistsWithGallery() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4">
-            OUR ARTISTS
+          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
+            Our Artists
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-pgc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             8 talented artists, each with their own unique style.
             Find the perfect match for your tattoo.
           </p>
@@ -59,7 +58,7 @@ export default function ArtistsWithGallery() {
               }`}
               style={{ transitionDelay: `${index * 80}ms` }}
             >
-              <div className="bg-gray-900 rounded-lg overflow-hidden hover:bg-gray-800 transition-all duration-300 h-full">
+              <div className="bg-pgc-900 rounded-lg overflow-hidden hover:bg-pgc-800 transition-colors duration-300 h-full">
                 {/* Artist Image */}
                 <div className="relative aspect-[3/4] w-full overflow-hidden">
                   <Image
@@ -72,10 +71,10 @@ export default function ArtistsWithGallery() {
 
                   {/* Overlay content */}
                   <div className="absolute bottom-0 left-0 right-0 p-4 md:p-5">
-                    <p className="text-xs uppercase tracking-wider text-gray-300 mb-1">
+                    <p className="text-xs uppercase tracking-[0.2em] text-pgc-400 mb-1 font-semibold">
                       {artist.specialization}
                     </p>
-                    <h3 className="text-lg md:text-xl font-bold">
+                    <h3 className="text-lg md:text-xl font-bold text-pgc-white">
                       {artist.name}
                     </h3>
                   </div>
@@ -87,7 +86,7 @@ export default function ArtistsWithGallery() {
                     {artist.tags.slice(0, 3).map((tag) => (
                       <span
                         key={tag}
-                        className="text-[10px] md:text-xs px-2 py-0.5 bg-gray-800 group-hover:bg-gray-700 rounded-full text-gray-300 transition-colors"
+                        className="text-xs px-3 py-1 bg-pgc-800 group-hover:bg-pgc-700 rounded-full text-pgc-300 transition-colors duration-300"
                       >
                         {tag}
                       </span>

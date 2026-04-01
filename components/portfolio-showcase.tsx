@@ -39,7 +39,6 @@ export default function PortfolioShowcase() {
       },
       { threshold: 0.1 }
     );
-
     const ref = sectionRef.current;
     if (ref) observer.observe(ref);
     return () => {
@@ -56,7 +55,7 @@ export default function PortfolioShowcase() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-black text-white"
+      className="py-16 md:py-24 bg-pgc-black-deep"
     >
       <div className="container mx-auto px-6">
         <div
@@ -64,10 +63,10 @@ export default function PortfolioShowcase() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4">
-            OUR BEST WORK
+          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
+            Our Best Work
           </h2>
-          <p className="text-gray-400 text-lg max-w-2xl mx-auto">
+          <p className="text-pgc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             Every piece tells a unique story. Browse our portfolio to find your
             style.
           </p>
@@ -84,13 +83,13 @@ export default function PortfolioShowcase() {
             <button
               key={cat}
               onClick={() => setActiveCategory(cat)}
-              className={`px-4 py-2 rounded-full text-sm font-medium tracking-wider transition-all duration-300 ${
+              className={`px-4 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
                 activeCategory === cat
-                  ? "bg-white text-black"
-                  : "bg-gray-800 text-gray-300 hover:bg-gray-700"
+                  ? "bg-pgc-white text-pgc-black"
+                  : "bg-pgc-800 text-pgc-300 hover:bg-pgc-700"
               }`}
             >
-              {cat.toUpperCase()}
+              {cat}
             </button>
           ))}
         </div>
@@ -101,11 +100,9 @@ export default function PortfolioShowcase() {
             <div
               key={index}
               className={`relative aspect-square group overflow-hidden rounded-lg cursor-pointer transition-all duration-500 ${
-                isVisible
-                  ? "opacity-100 scale-100"
-                  : "opacity-0 scale-95"
+                isVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
               }`}
-              style={{ transitionDelay: `${200 + index * 50}ms` }}
+              style={{ transitionDelay: `${200 + index * 80}ms` }}
             >
               <Image
                 src={item.image}
@@ -113,12 +110,12 @@ export default function PortfolioShowcase() {
                 fill
                 className="object-cover group-hover:scale-110 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-colors duration-300 flex items-end">
-                <div className="p-3 md:p-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 translate-y-2 group-hover:translate-y-0">
-                  <p className="text-white text-sm font-semibold">
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
+                <div className="p-3 md:p-4">
+                  <p className="text-pgc-white text-sm font-bold uppercase tracking-wider">
                     {item.category}
                   </p>
-                  <p className="text-gray-300 text-xs">{item.artist}</p>
+                  <p className="text-pgc-400 text-xs">{item.artist}</p>
                 </div>
               </div>
             </div>
@@ -129,9 +126,9 @@ export default function PortfolioShowcase() {
         <div className="text-center mt-10">
           <Link
             href="/#artists"
-            className="inline-block border border-white/30 text-white px-8 py-3 rounded-full tracking-wider hover:bg-white/10 transition-all duration-300"
+            className="inline-block border border-white/30 text-pgc-white px-8 py-3 rounded-full uppercase tracking-wider text-sm font-bold hover:bg-white/10 transition-all duration-300"
           >
-            VIEW ALL ARTISTS & PORTFOLIOS
+            View All Artists & Portfolios
           </Link>
         </div>
       </div>

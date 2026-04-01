@@ -9,7 +9,6 @@ export default function FloatingCta() {
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show after scrolling past hero
       setVisible(window.scrollY > window.innerHeight * 0.5);
     };
     window.addEventListener("scroll", handleScroll);
@@ -19,7 +18,7 @@ export default function FloatingCta() {
   return (
     <Link
       href="/booking"
-      className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-white text-black font-bold px-5 py-3 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 ${
+      className={`fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-pgc-white text-pgc-black font-bold px-5 py-3 rounded-full hover:scale-105 transition-all duration-300 ${
         visible
           ? "opacity-100 translate-y-0"
           : "opacity-0 translate-y-4 pointer-events-none"
@@ -30,8 +29,12 @@ export default function FloatingCta() {
       }}
     >
       <Calendar className="w-4 h-4" />
-      <span className="text-sm tracking-wider hidden sm:inline">BOOK NOW</span>
-      <span className="text-sm tracking-wider sm:hidden">BOOK</span>
+      <span className="text-sm uppercase tracking-wider hidden sm:inline font-bold">
+        Book Now
+      </span>
+      <span className="text-sm uppercase tracking-wider sm:hidden font-bold">
+        Book
+      </span>
     </Link>
   );
 }

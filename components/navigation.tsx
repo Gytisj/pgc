@@ -44,12 +44,12 @@ export default function Navigation() {
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-30 transition-all duration-300 ${
-        isScrolled ? "bg-black bg-opacity-90" : "bg-transparent"
+        isScrolled ? "bg-pgc-black/90 backdrop-blur-sm" : "bg-transparent"
       }`}
     >
       <div className="container mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
-          <Link href="/" className="text-2xl font-bold tracking-wider">
+          <Link href="/">
             <div
               className={`transition-all duration-300 ${
                 isScrolled ? "opacity-100 scale-100" : "opacity-0 scale-95"
@@ -58,8 +58,8 @@ export default function Navigation() {
               <Image
                 src={pgcImage}
                 alt="Pain Game Club"
-                width={50}
-                height={50}
+                width={44}
+                height={44}
                 className="rounded-full"
               />
             </div>
@@ -72,7 +72,7 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="bg-white text-black px-5 py-2 rounded-full text-sm font-bold tracking-wider hover:bg-gray-100 transition-colors"
+                  className="bg-pgc-white text-pgc-black px-5 py-2 rounded-full text-sm font-bold uppercase tracking-wider hover:bg-gray-100 transition-colors duration-300"
                 >
                   {link.label}
                 </Link>
@@ -80,7 +80,7 @@ export default function Navigation() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="hover:text-gray-300 transition-colors text-sm tracking-wider"
+                  className="text-pgc-white hover:text-pgc-300 transition-colors duration-300 text-sm uppercase tracking-wider"
                 >
                   {link.label}
                 </Link>
@@ -91,7 +91,7 @@ export default function Navigation() {
           {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
-              className="text-white"
+              className="text-pgc-white p-2"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             >
               <svg
@@ -116,12 +116,12 @@ export default function Navigation() {
       <div
         className={`md:hidden fixed inset-0 z-50 transition-all duration-300 ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
-        } bg-black`}
+        } bg-pgc-black`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
         <button
           onClick={() => setIsMobileMenuOpen(false)}
-          className="absolute top-4 right-8 text-white hover:text-gray-300 transition-colors z-60 p-2"
+          className="absolute top-4 right-8 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3"
         >
           <X className="w-8 h-8" />
         </button>
@@ -134,10 +134,10 @@ export default function Navigation() {
             <Link
               key={link.href}
               href={link.href}
-              className={`block text-white hover:text-gray-300 transition-all duration-300 tracking-wider hover:scale-110 ${
+              className={`block transition-all duration-300 tracking-wider hover:scale-110 ${
                 link.label === "Book Now"
-                  ? "bg-white text-black px-8 py-3 rounded-full text-xl font-bold hover:bg-gray-100 hover:text-black"
-                  : "text-3xl font-light"
+                  ? "bg-pgc-white text-pgc-black px-8 py-3 rounded-full text-xl font-bold uppercase hover:bg-gray-100"
+                  : "text-pgc-white text-3xl font-light uppercase hover:text-pgc-300"
               }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
