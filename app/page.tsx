@@ -1,11 +1,15 @@
 import Navigation from "@/components/navigation";
 import HeroSection from "@/components/hero-section";
-import AppointmentSection from "@/components/appointment-section";
-import AboutSection from "@/components/about-section";
+import TrustIndicators from "@/components/trust-indicators";
+import PortfolioShowcase from "@/components/portfolio-showcase";
+import ProcessSection from "@/components/process-section";
+import SocialProof from "@/components/social-proof";
 import ArtistsWithGallery from "@/components/artists-with-gallery";
+import CtaSection from "@/components/cta-section";
+import FaqSection from "@/components/faq-section";
 import ContactSection from "@/components/contact-section";
-import ParallaxSection from "@/components/parallax-section";
 import Footer from "@/components/footer";
+import FloatingCta from "@/components/floating-cta";
 
 import "@/globalStyles/index.css";
 
@@ -14,12 +18,16 @@ export default function Home() {
     <main className="bg-black text-white">
       <Navigation />
       <HeroSection />
-      <AppointmentSection />
-      <AboutSection />
+      <TrustIndicators />
+      <PortfolioShowcase />
+      <ProcessSection />
+      <SocialProof />
       <ArtistsWithGallery />
-      <ParallaxSection />
+      <CtaSection />
+      <FaqSection />
       <ContactSection />
       <Footer />
+      <FloatingCta />
     </main>
   );
 }

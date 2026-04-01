@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description:
     "Pain Game Club - Professional tattoo studio in Vilnius, Lithuania. Specializing in fine line tattoos, realistic portraits, and custom artwork.",
   keywords:
-    "don tattoo,tattoo, studio, Vilnius, Lithuania, fine line, realistic, portraits, custom artwork, pgc, pain game club",
+    "don tattoo,tattoo studio, Vilnius, Vilnius tattoo, Lithuania, fine line, realistic, portraits, custom artwork, pgc, pain game club",
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {

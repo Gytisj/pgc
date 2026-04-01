@@ -1,8 +1,9 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, Star } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 import pgcLogo from "./assets/pgc.jpg";
 
 export default function HeroSection() {
@@ -12,41 +13,17 @@ export default function HeroSection() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setLogoVisible(true);
-    }, 1000);
+    }, 800);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
     const handleScroll = () => {
-      const scrollPosition = window.scrollY;
-      const windowHeight = window.innerHeight;
-
-      // Hide scroll button when user scrolls more than 10% of viewport height
-      setScrollButtonVisible(scrollPosition < windowHeight * 0.1);
+      setScrollButtonVisible(window.scrollY < window.innerHeight * 0.1);
     };
-
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
-
-  const scrollToNext = () => {
-    const appointmentSection = document.getElementById("appointment");
-    if (appointmentSection) {
-      const elementRect = appointmentSection.getBoundingClientRect();
-      const absoluteElementTop = elementRect.top + window.pageYOffset;
-      const elementHeight = appointmentSection.offsetHeight;
-      const windowHeight = window.innerHeight;
-
-      // Calculate the scroll position to center the element
-      const scrollToPosition =
-        absoluteElementTop - windowHeight / 2 + elementHeight / 2;
-
-      window.scrollTo({
-        top: scrollToPosition,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <section
@@ -75,32 +52,75 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-black/50" />
       </div>
 
-      {/* Animated Logo */}
+      {/* Content */}
       <div
-        className={`relative z-10 text-center transition-all duration-2000 ${
-          logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-75"
+        className={`relative z-10 text-center px-6 max-w-4xl mx-auto transition-all duration-2000 ${
+          logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
       >
-        <div className="space-y-8 text-center">
-          <div
-            className={`transition-all duration-1000 ${
-              logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
-            } mb-8`}
-          >
-            <div className="w-32 h-32 md:w-40 md:h-40 bg-white rounded-full flex items-center justify-center shadow-2xl relative mx-auto">
-              <Image
-                src={pgcLogo}
-                alt="Pain Game Club"
-                width={120}
-                height={120}
-                className="rounded-full w-24 h-24 md:w-32 md:h-32 object-cover"
-              />
-              <div className="absolute inset-0 rounded-full border-4 border-white/30 animate-pulse" />
-            </div>
+        {/* Logo */}
+        <div className="mb-6">
+          <div className="w-28 h-28 md:w-36 md:h-36 bg-white rounded-full flex items-center justify-center shadow-2xl relative mx-auto">
+            <Image
+              src={pgcLogo}
+              alt="Pain Game Club"
+              width={120}
+              height={120}
+              className="rounded-full w-20 h-20 md:w-28 md:h-28 object-cover"
+            />
+            <div className="absolute inset-0 rounded-full border-4 border-white/30 animate-pulse" />
           </div>
-          <h1 className="pgc-header text-3xl md:text-4xl lg:text-6xl font-bold mb-4 tracking-wider px-4">
-            Welcome to the game
-          </h1>
+        </div>
+
+        {/* Positioning */}
+        <p className="text-sm md:text-base uppercase tracking-[0.3em] text-gray-300 mb-3">
+          Premium Tattoo Studio in Vilnius
+        </p>
+
+        {/* Value Proposition */}
+        <h1 className="pgc-header text-3xl md:text-5xl lg:text-6xl font-bold mb-6 tracking-wider">
+          Where Art Meets Skin
+        </h1>
+
+        <p className="text-lg md:text-xl text-gray-300 max-w-2xl mx-auto mb-8 leading-relaxed">
+          8 professional artists. Thousands of stories turned into permanent art.
+          Your vision, our craft.
+        </p>
+
+        {/* CTA */}
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-10">
+          <Link
+            href="/booking"
+            className="bg-white text-black font-bold px-8 py-4 rounded-full text-lg hover:bg-gray-100 hover:scale-105 transition-all duration-300 tracking-wider shadow-2xl"
+            style={{
+              boxShadow:
+                "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.1)",
+            }}
+          >
+            BOOK A CONSULTATION
+          </Link>
+          <a
+            href="#portfolio"
+            className="text-white border border-white/30 px-8 py-4 rounded-full text-lg hover:bg-white/10 transition-all duration-300 tracking-wider"
+          >
+            VIEW OUR WORK
+          </a>
+        </div>
+
+        {/* Reviews Widget */}
+        <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm px-5 py-3 rounded-full">
+          <div className="flex">
+            {[...Array(5)].map((_, i) => (
+              <Star
+                key={i}
+                className="w-4 h-4 fill-yellow-400 text-yellow-400"
+              />
+            ))}
+          </div>
+          <span className="text-sm text-gray-200">
+            <span className="font-semibold text-white">5.0</span> from 200+
+            reviews
+          </span>
         </div>
       </div>
 
@@ -113,7 +133,11 @@ export default function HeroSection() {
         }`}
       >
         <button
-          onClick={scrollToNext}
+          onClick={() => {
+            document
+              .getElementById("trust")
+              ?.scrollIntoView({ behavior: "smooth" });
+          }}
           className="flex flex-col items-center text-white/70 hover:text-white transition-colors group"
         >
           <span className="text-sm mb-2 tracking-wider">SCROLL</span>
