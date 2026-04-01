@@ -52,7 +52,7 @@ export default function TrustIndicators() {
     <section
       id="trust"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-5xl mx-auto">
@@ -66,14 +66,14 @@ export default function TrustIndicators() {
               }`}
               style={{ transitionDelay: `${index * 100}ms` }}
             >
-              <stat.icon className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-4 text-pgc-400" />
+              <stat.icon className="w-8 h-8 md:w-10 md:h-10 mx-auto mb-4 text-pgc-cream/60" />
               <p className="text-3xl md:text-4xl font-bold mb-1 text-pgc-white">
                 {stat.value}
               </p>
               <p className="text-xs md:text-sm font-semibold uppercase tracking-[0.2em] text-pgc-white mb-1">
                 {stat.label}
               </p>
-              <p className="text-xs md:text-sm text-pgc-400">
+              <p className="text-xs md:text-sm text-pgc-cream/60">
                 {stat.description}
               </p>
             </div>

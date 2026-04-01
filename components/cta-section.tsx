@@ -26,7 +26,7 @@ export default function CtaSection() {
   return (
     <section
       ref={sectionRef}
-      className="py-20 md:py-32 bg-pgc-black-deep"
+      className="py-20 md:py-32"
     >
       <div
         className={`container mx-auto px-6 text-center transition-all duration-1000 ${
@@ -46,7 +46,7 @@ export default function CtaSection() {
         <h2 className="pgc-header text-3xl md:text-5xl lg:text-6xl font-bold tracking-wider mb-6 uppercase text-pgc-white">
           Ready to Start?
         </h2>
-        <p className="text-pgc-300 text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
+        <p className="text-pgc-cream text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed">
           Book a free consultation. Tell us your idea and we&apos;ll match you
           with the perfect artist.
         </p>

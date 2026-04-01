@@ -5,7 +5,7 @@ import pgcLogo from "./assets/pgc.jpg";
 
 export default function Footer() {
   return (
-    <footer className="bg-pgc-black-deep border-t border-pgc-800 py-6 md:py-8">
+    <footer className="border-t border-pgc-brown/50 py-6 md:py-8">
       <div className="container mx-auto px-6 text-center">
         <div className="flex flex-col md:flex-row items-center justify-center space-y-3 md:space-y-0 md:space-x-4 mb-4">
           <div className="w-10 h-10 md:w-12 md:h-12 bg-pgc-white rounded-full flex items-center justify-center">
@@ -21,7 +21,7 @@ export default function Footer() {
             Pain Game Club
           </span>
         </div>
-        <p className="text-pgc-400 text-xs md:text-sm">
+        <p className="text-pgc-cream/60 text-xs md:text-sm">
           &copy; 2024 Pain Game Club. All rights reserved.
         </p>
       </div>

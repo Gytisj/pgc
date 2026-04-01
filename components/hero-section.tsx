@@ -9,6 +9,14 @@ import pgcLogo from "./assets/pgc.jpg";
 export default function HeroSection() {
   const [logoVisible, setLogoVisible] = useState(false);
   const [scrollButtonVisible, setScrollButtonVisible] = useState(true);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const check = () => setIsMobile(window.innerWidth < 768);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
 
   useEffect(() => {
     const timer = setTimeout(() => setLogoVisible(true), 800);
@@ -26,35 +34,39 @@ export default function HeroSection() {
   return (
     <section
       id="home"
-      className="relative h-screen flex items-center justify-center overflow-hidden bg-pgc-black"
+      className="relative flex items-center justify-center bg-pgc-black"
+      style={{ height: "calc(100vh + 100px)" }}
     >
-      {/* Background Video */}
+      {/* Background Video — fills entire section including extra 100px */}
       <div className="absolute inset-0 z-0">
-        <iframe
-          className="opacity-40"
-          src="https://www.youtube.com/embed/QLMqfKPOL6w?autoplay=1&mute=1&loop=1&playlist=QLMqfKPOL6w&controls=0&showinfo=0&rel=0&iv_load_policy=3&modestbranding=1&start=10"
-          title="Background Video"
-          allow="autoplay; encrypted-media"
-          allowFullScreen
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            width: "120vw",
-            height: "120vh",
-            transform: "translate(-50%, -50%)",
-            zIndex: -1,
-            pointerEvents: "none",
-          }}
-        />
-        <div className="absolute inset-0 bg-black/40" />
+        <video
+          key={isMobile ? "mobile" : "desktop"}
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover opacity-80"
+        >
+          <source
+            src={
+              isMobile
+                ? "/videos/hero-mobile.mp4"
+                : "/videos/hero-desktop.mp4"
+            }
+            type="video/mp4"
+          />
+        </video>
+        <div className="absolute inset-0 bg-black/30" />
+        {/* Background pattern overlay on video */}
+        <div className="absolute inset-0 hero-wave-cover opacity-20 mix-blend-overlay" />
       </div>
 
-      {/* Content */}
+      {/* Content — centered within the 100vh area */}
       <div
         className={`relative z-10 text-center px-6 max-w-4xl mx-auto transition-all duration-2000 ${
           logoVisible ? "opacity-100 scale-100" : "opacity-0 scale-95"
         }`}
+        style={{ marginBottom: "100px" }}
       >
         {/* Logo */}
         <div className="mb-6">
@@ -71,7 +83,7 @@ export default function HeroSection() {
         </div>
 
         {/* Positioning */}
-        <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-pgc-400 mb-3 font-semibold">
+        <p className="text-xs md:text-sm uppercase tracking-[0.3em] text-pgc-cream/60 mb-3 font-semibold">
           Premium Tattoo Studio in Vilnius
         </p>
 
@@ -80,9 +92,9 @@ export default function HeroSection() {
           Where Art Meets Skin
         </h1>
 
-        <p className="text-base md:text-lg text-pgc-300 max-w-2xl mx-auto mb-8 leading-relaxed">
-          8 professional artists. Thousands of stories turned into permanent art.
-          Your vision, our craft.
+        <p className="text-base md:text-lg text-pgc-cream max-w-2xl mx-auto mb-8 leading-relaxed">
+          8 professional artists. Thousands of stories turned into permanent
+          art. Your vision, our craft.
         </p>
 
         {/* CTA */}
@@ -115,7 +127,7 @@ export default function HeroSection() {
               />
             ))}
           </div>
-          <span className="text-xs md:text-sm text-pgc-300">
+          <span className="text-xs md:text-sm text-pgc-cream">
             <span className="font-semibold text-pgc-white">5.0</span> from 200+
             reviews
           </span>
@@ -124,11 +136,12 @@ export default function HeroSection() {
 
       {/* Scroll Indicator */}
       <div
-        className={`absolute bottom-8 left-1/2 transform -translate-x-1/2 z-10 transition-all duration-500 ${
+        className={`absolute left-1/2 -translate-x-1/2 z-10 transition-all duration-500 ${
           scrollButtonVisible
             ? "opacity-100 translate-y-0"
             : "opacity-0 translate-y-4 pointer-events-none"
         }`}
+        style={{ bottom: "130px" }}
       >
         <button
           onClick={() => {

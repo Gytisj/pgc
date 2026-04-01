@@ -55,7 +55,7 @@ export default function PortfolioShowcase() {
     <section
       id="portfolio"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black-deep"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div
@@ -66,7 +66,7 @@ export default function PortfolioShowcase() {
           <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
             Our Best Work
           </h2>
-          <p className="text-pgc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-pgc-cream/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             Every piece tells a unique story. Browse our portfolio to find your
             style.
           </p>
@@ -86,7 +86,7 @@ export default function PortfolioShowcase() {
               className={`px-4 py-2 rounded-full text-xs md:text-sm font-bold uppercase tracking-wider transition-all duration-300 ${
                 activeCategory === cat
                   ? "bg-pgc-white text-pgc-black"
-                  : "bg-pgc-800 text-pgc-300 hover:bg-pgc-700"
+                  : "bg-pgc-brown/80 text-pgc-cream hover:bg-pgc-brown"
               }`}
             >
               {cat}
@@ -115,7 +115,7 @@ export default function PortfolioShowcase() {
                   <p className="text-pgc-white text-sm font-bold uppercase tracking-wider">
                     {item.category}
                   </p>
-                  <p className="text-pgc-400 text-xs">{item.artist}</p>
+                  <p className="text-pgc-cream/60 text-xs">{item.artist}</p>
                 </div>
               </div>
             </div>

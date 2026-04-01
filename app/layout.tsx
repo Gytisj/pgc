@@ -1,9 +1,27 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Outfit, Archivo_Black, Cedarville_Cursive } from "next/font/google";
 import { ReactNode } from "react";
 import "./globals.css";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  subsets: ["latin"],
+  variable: "--font-outfit",
+  display: "swap",
+});
+
+const archivoBlack = Archivo_Black({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-archivo-black",
+  display: "swap",
+});
+
+const cedarville = Cedarville_Cursive({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-cedarville",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Pain Game Club - Tattoo Studio",
@@ -16,7 +34,11 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={`${outfit.variable} ${archivoBlack.variable} ${cedarville.variable} font-sans`}
+      >
+        {children}
+      </body>
     </html>
   );
 }

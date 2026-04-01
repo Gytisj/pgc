@@ -58,7 +58,7 @@ export default function ProcessSection() {
     <section
       id="process"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-pgc-black"
+      className="py-16 md:py-24"
     >
       <div className="container mx-auto px-6">
         <div
@@ -69,7 +69,7 @@ export default function ProcessSection() {
           <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
             How It Works
           </h2>
-          <p className="text-pgc-400 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
+          <p className="text-pgc-cream/60 text-base md:text-lg max-w-2xl mx-auto leading-relaxed">
             From first idea to healed tattoo — here&apos;s what to expect.
           </p>
         </div>
@@ -79,7 +79,7 @@ export default function ProcessSection() {
           {/* Desktop: horizontal */}
           <div className="hidden md:flex items-start justify-between relative">
             {/* Connecting line */}
-            <div className="absolute top-8 left-[10%] right-[10%] h-px bg-pgc-800" />
+            <div className="absolute top-8 left-[10%] right-[10%] h-px bg-pgc-brown/80" />
 
             {steps.map((step, index) => (
               <div
@@ -97,7 +97,7 @@ export default function ProcessSection() {
                 <h3 className="text-sm font-bold mb-2 uppercase tracking-wider text-pgc-white">
                   {step.title}
                 </h3>
-                <p className="text-pgc-400 text-xs leading-relaxed">
+                <p className="text-pgc-cream/60 text-xs leading-relaxed">
                   {step.description}
                 </p>
               </div>
@@ -123,7 +123,7 @@ export default function ProcessSection() {
                   <h3 className="text-sm font-bold mb-1 uppercase tracking-wider text-pgc-white">
                     {step.title}
                   </h3>
-                  <p className="text-pgc-400 text-sm leading-relaxed">
+                  <p className="text-pgc-cream/60 text-sm leading-relaxed">
                     {step.description}
                   </p>
                 </div>

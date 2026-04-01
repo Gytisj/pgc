@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 export default function BookingPage() {
   return (
-    <main className="bg-pgc-black text-pgc-white min-h-screen">
+    <main className="text-pgc-white min-h-screen font-medium">
       <Navigation />
       <BookingForm />
       <Footer />
