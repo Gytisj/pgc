@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { Mail, MapPin, Instagram, Clock } from "lucide-react";
-import StyledButton from "./styled-button";
+import Link from "next/link";
 
 export default function ContactSection() {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,41 +11,47 @@ export default function ContactSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
-      { threshold: 0.3 }
+      { threshold: 0.2 }
     );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
+    const ref = sectionRef.current;
+    if (ref) observer.observe(ref);
+    return () => {
+      if (ref) observer.unobserve(ref);
+    };
   }, []);
 
   return (
     <section
       id="contact"
       ref={sectionRef}
-      className="bg-gradient-to-b from-gray-900 to-black py-16 md:py-20 mb-0"
+      className="py-16 md:py-24 bg-pgc-black-deep"
     >
       <div className="container mx-auto px-6">
         <div
-          className={`max-w-4xl mx-auto transition-all duration-1000 ${
-            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          className={`max-w-4xl mx-auto transition-all duration-700 ${
+            isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="pgc-header text-3xl md:text-5xl lg:text-7xl font-bold text-center mb-8 md:mb-16 tracking-wider px-4">
-            CONTACT
+          <h2 className="pgc-header text-3xl md:text-5xl font-bold text-center mb-12 md:mb-16 tracking-wider uppercase text-pgc-white">
+            Contact
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-            <div className="space-y-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+            <div
+              className={`space-y-8 transition-all duration-700 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "100ms" }}
+            >
               <div>
-                <h3 className="text-3xl font-bold mb-8">Get in Touch</h3>
-                <p className="text-lg text-gray-300 mb-8">
+                <h3 className="text-xl md:text-2xl font-bold mb-4 uppercase tracking-wider text-pgc-white">
+                  Get in Touch
+                </h3>
+                <p className="text-base text-pgc-300 mb-8 leading-relaxed">
                   Ready to start your tattoo journey? Book a consultation and
                   let&apos;s create something extraordinary together.
                 </p>
@@ -53,12 +59,14 @@ export default function ContactSection() {
 
               <div className="space-y-6">
                 <div className="flex items-center space-x-4">
-                  <Mail className="w-6 h-6 text-white" />
+                  <Mail className="w-5 h-5 text-pgc-400" />
                   <div>
-                    <p className="font-semibold">Email</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                      Email
+                    </p>
                     <a
                       href="mailto:info@paingameclub.lt"
-                      className="text-gray-300 hover:text-white transition-colors"
+                      className="text-pgc-white hover:text-pgc-300 transition-colors duration-300"
                     >
                       info@paingameclub.lt
                     </a>
@@ -66,24 +74,28 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <MapPin className="w-6 h-6 text-white" />
+                  <MapPin className="w-5 h-5 text-pgc-400" />
                   <div>
-                    <p className="font-semibold">Location</p>
-                    <p className="text-gray-300">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                      Location
+                    </p>
+                    <p className="text-pgc-300">
                       Algirdo g. 38, Vilnius, Lithuania 03806
                     </p>
                   </div>
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <Instagram className="w-6 h-6 text-white" />
+                  <Instagram className="w-5 h-5 text-pgc-400" />
                   <div>
-                    <p className="font-semibold">INSTAGRAM</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                      Instagram
+                    </p>
                     <a
                       href="https://instagram.com/pain_game_club"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-gray-300 hover:text-white transition-colors"
+                      className="text-pgc-white hover:text-pgc-300 transition-colors duration-300"
                     >
                       @pain_game_club
                     </a>
@@ -91,43 +103,61 @@ export default function ContactSection() {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <Clock className="w-6 h-6 text-white" />
+                  <Clock className="w-5 h-5 text-pgc-400" />
                   <div>
-                    <p className="font-semibold">Hours</p>
-                    <p className="text-gray-300">By appointment only</p>
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-pgc-400 mb-1">
+                      Hours
+                    </p>
+                    <p className="text-pgc-300">By appointment only</p>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="bg-gray-800/50 p-8 rounded-lg backdrop-blur-sm">
-              <h4 className="text-2xl font-bold mb-6">Book Consultation</h4>
+            <div
+              className={`bg-pgc-900/50 backdrop-blur-sm p-8 rounded-lg transition-all duration-700 ${
+                isVisible
+                  ? "opacity-100 translate-y-0"
+                  : "opacity-0 translate-y-8"
+              }`}
+              style={{ transitionDelay: "200ms" }}
+            >
+              <h3 className="text-xl md:text-2xl font-bold mb-6 uppercase tracking-wider text-pgc-white">
+                Quick Message
+              </h3>
               <form className="space-y-4">
-                <div>
-                  <input
-                    type="text"
-                    placeholder="Your Name"
-                    className="w-full p-3 bg-black/50 border border-gray-600 rounded focus:border-white focus:outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <input
-                    type="email"
-                    placeholder="Your Email"
-                    className="w-full p-3 bg-black/50 border border-gray-600 rounded focus:border-white focus:outline-none transition-colors"
-                  />
-                </div>
-                <div>
-                  <textarea
-                    placeholder="Describe your tattoo idea..."
-                    rows={4}
-                    className="w-full p-3 bg-black/50 border border-gray-600 rounded focus:border-white focus:outline-none transition-colors resize-none"
-                  />
-                </div>
-                <StyledButton type="submit" className="w-full" size="md">
+                <input
+                  type="text"
+                  placeholder="Your Name"
+                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700"
+                />
+                <input
+                  type="email"
+                  placeholder="Your Email"
+                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700"
+                />
+                <textarea
+                  placeholder="Your message..."
+                  rows={4}
+                  className="w-full p-4 bg-pgc-black border border-pgc-800 rounded-lg focus:border-pgc-white focus:outline-none transition-colors duration-300 text-pgc-white placeholder-pgc-700 resize-none"
+                />
+                <button
+                  type="submit"
+                  className="w-full bg-pgc-white text-pgc-black font-bold py-4 rounded-full uppercase tracking-wider hover:bg-gray-100 hover:scale-105 transition-all duration-300"
+                >
                   Send Message
-                </StyledButton>
+                </button>
               </form>
+              <p className="text-pgc-400 text-xs mt-4 text-center">
+                Or{" "}
+                <Link
+                  href="/booking"
+                  className="text-pgc-white underline hover:text-pgc-300 transition-colors duration-300"
+                >
+                  book a full consultation
+                </Link>{" "}
+                instead.
+              </p>
             </div>
           </div>
         </div>

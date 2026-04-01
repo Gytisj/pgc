@@ -16,7 +16,6 @@ export default function SocialProof() {
       },
       { threshold: 0.2 }
     );
-
     const ref = sectionRef.current;
     if (ref) observer.observe(ref);
     return () => {
@@ -24,7 +23,6 @@ export default function SocialProof() {
     };
   }, []);
 
-  // Auto-advance every 5s
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
@@ -39,7 +37,6 @@ export default function SocialProof() {
   const next = () =>
     setCurrentIndex((currentIndex + 1) % testimonials.length);
 
-  // Show 3 on desktop, 1 on mobile
   const getVisibleTestimonials = () => {
     const result = [];
     for (let i = 0; i < 3; i++) {
@@ -52,7 +49,7 @@ export default function SocialProof() {
     <section
       id="reviews"
       ref={sectionRef}
-      className="py-16 md:py-24 bg-black text-white"
+      className="py-16 md:py-24 bg-pgc-black-deep"
     >
       <div className="container mx-auto px-6">
         <div
@@ -60,18 +57,18 @@ export default function SocialProof() {
             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
           }`}
         >
-          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4">
-            WHAT OUR CLIENTS SAY
+          <h2 className="pgc-header text-3xl md:text-5xl font-bold tracking-wider mb-4 uppercase text-pgc-white">
+            What Our Clients Say
           </h2>
           <div className="flex items-center justify-center gap-2 mb-2">
             {[...Array(5)].map((_, i) => (
               <Star
                 key={i}
-                className="w-5 h-5 fill-yellow-400 text-yellow-400"
+                className="w-4 h-4 fill-yellow-400 text-yellow-400"
               />
             ))}
           </div>
-          <p className="text-gray-400">200+ five-star reviews</p>
+          <p className="text-pgc-400 text-sm">200+ five-star reviews</p>
         </div>
 
         {/* Desktop: 3 cards */}
@@ -79,7 +76,7 @@ export default function SocialProof() {
           {getVisibleTestimonials().map((testimonial, index) => (
             <div
               key={`${testimonial.name}-${index}`}
-              className={`bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 md:p-8 transition-all duration-700 ${
+              className={`bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6 md:p-8 transition-all duration-700 ${
                 isVisible
                   ? "opacity-100 translate-y-0"
                   : "opacity-0 translate-y-8"
@@ -94,12 +91,14 @@ export default function SocialProof() {
                   />
                 ))}
               </div>
-              <p className="text-gray-300 leading-relaxed mb-4 text-sm">
+              <p className="text-pgc-300 leading-relaxed mb-4 text-sm">
                 &ldquo;{testimonial.text}&rdquo;
               </p>
-              <div className="border-t border-gray-700 pt-4">
-                <p className="font-semibold text-white">{testimonial.name}</p>
-                <p className="text-xs text-gray-400">
+              <div className="border-t border-pgc-800 pt-4">
+                <p className="font-semibold text-pgc-white text-sm">
+                  {testimonial.name}
+                </p>
+                <p className="text-xs text-pgc-400">
                   {testimonial.tattooStyle} by {testimonial.artistName}
                 </p>
               </div>
@@ -110,7 +109,7 @@ export default function SocialProof() {
         {/* Mobile: single card with nav */}
         <div className="md:hidden">
           <div
-            className={`bg-gray-900/50 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 ${
+            className={`bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6 transition-all duration-500 ${
               isVisible
                 ? "opacity-100 translate-y-0"
                 : "opacity-0 translate-y-8"
@@ -124,14 +123,14 @@ export default function SocialProof() {
                 />
               ))}
             </div>
-            <p className="text-gray-300 leading-relaxed mb-4">
+            <p className="text-pgc-300 leading-relaxed mb-4">
               &ldquo;{testimonials[currentIndex].text}&rdquo;
             </p>
-            <div className="border-t border-gray-700 pt-4">
-              <p className="font-semibold text-white">
+            <div className="border-t border-pgc-800 pt-4">
+              <p className="font-semibold text-pgc-white">
                 {testimonials[currentIndex].name}
               </p>
-              <p className="text-xs text-gray-400">
+              <p className="text-xs text-pgc-400">
                 {testimonials[currentIndex].tattooStyle} by{" "}
                 {testimonials[currentIndex].artistName}
               </p>
@@ -141,38 +140,38 @@ export default function SocialProof() {
           <div className="flex justify-center items-center gap-6 mt-6">
             <button
               onClick={prev}
-              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition-colors"
+              className="w-11 h-11 rounded-full bg-pgc-800 flex items-center justify-center hover:bg-pgc-700 transition-colors duration-300"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="w-5 h-5 text-pgc-white" />
             </button>
             <div className="flex gap-1.5">
               {testimonials.map((_, i) => (
                 <button
                   key={i}
                   onClick={() => setCurrentIndex(i)}
-                  className={`w-1.5 h-1.5 rounded-full transition-all ${
-                    i === currentIndex ? "bg-white scale-125" : "bg-gray-600"
+                  className={`w-1.5 h-1.5 rounded-full transition-all duration-300 ${
+                    i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-700"
                   }`}
                 />
               ))}
             </div>
             <button
               onClick={next}
-              className="w-10 h-10 rounded-full bg-gray-800 flex items-center justify-center hover:bg-gray-700 transition-colors"
+              className="w-11 h-11 rounded-full bg-pgc-800 flex items-center justify-center hover:bg-pgc-700 transition-colors duration-300"
             >
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="w-5 h-5 text-pgc-white" />
             </button>
           </div>
         </div>
 
-        {/* Navigation dots - desktop */}
+        {/* Desktop dots */}
         <div className="hidden md:flex justify-center gap-2 mt-8">
           {testimonials.map((_, i) => (
             <button
               key={i}
               onClick={() => setCurrentIndex(i)}
-              className={`w-2 h-2 rounded-full transition-all ${
-                i === currentIndex ? "bg-white scale-125" : "bg-gray-600"
+              className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                i === currentIndex ? "bg-pgc-white scale-125" : "bg-pgc-700"
               }`}
             />
           ))}

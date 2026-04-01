@@ -4,7 +4,6 @@ import { useEffect, useRef, useState, useCallback } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { ChevronLeft, ChevronRight, X, ArrowLeft, Star } from "lucide-react";
-import StyledButton from "./styled-button";
 import { Artist } from "@/lib/artists-data";
 import Navigation from "./navigation";
 import Footer from "./footer";
@@ -87,7 +86,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
   }, []);
 
   return (
-    <div className="min-h-screen bg-black text-white overflow-x-hidden">
+    <div className="min-h-screen bg-pgc-black text-pgc-white overflow-x-hidden">
       <Navigation />
 
       <section
@@ -100,10 +99,12 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
         <div className="container mx-auto px-6 mb-8">
           <Link
             href="/#artists"
-            className="inline-flex items-center gap-2 text-white/70 hover:text-white transition-colors group"
+            className="inline-flex items-center gap-2 text-pgc-400 hover:text-pgc-white transition-colors duration-300 group"
           >
-            <ArrowLeft className="w-5 h-5 group-hover:scale-110 transition-transform" />
-            <span className="text-sm tracking-wider">BACK TO ARTISTS</span>
+            <ArrowLeft className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
+            <span className="text-xs uppercase tracking-[0.2em] font-semibold">
+              Back to Artists
+            </span>
           </Link>
         </div>
 
@@ -133,10 +134,10 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
             {/* Artist Info */}
             <div className="text-center md:text-left flex-1">
-              <p className="text-sm uppercase tracking-[0.2em] text-gray-400 mb-2">
+              <p className="text-xs uppercase tracking-[0.2em] text-pgc-400 mb-2 font-semibold">
                 {artist.specialization}
               </p>
-              <h1 className="pgc-header text-3xl md:text-5xl font-bold mb-4 tracking-wider">
+              <h1 className="pgc-header text-3xl md:text-5xl font-bold mb-4 tracking-wider text-pgc-white">
                 {artist.name}
               </h1>
 
@@ -145,28 +146,33 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                 {artist.tags.map((tag) => (
                   <span
                     key={tag}
-                    className="text-xs px-3 py-1 bg-gray-800 rounded-full text-gray-300"
+                    className="text-xs px-3 py-1 bg-pgc-800 rounded-full text-pgc-300"
                   >
                     {tag}
                   </span>
                 ))}
               </div>
 
-              <p className="text-gray-300 text-lg leading-relaxed max-w-2xl mb-6">
+              <p className="text-pgc-300 text-base md:text-lg leading-relaxed max-w-2xl mb-6">
                 {artist.description}
               </p>
 
               {artist.instagram && (
-                <p className="text-gray-400 text-sm mb-6">
+                <p className="text-pgc-400 text-xs uppercase tracking-[0.2em] mb-6">
                   Instagram:{" "}
-                  <span className="text-white">{artist.instagram}</span>
+                  <span className="text-pgc-white">{artist.instagram}</span>
                 </p>
               )}
 
-              <Link href="/booking">
-                <StyledButton size="md">
-                  BOOK WITH {artist.name.split(" ")[0].toUpperCase()}
-                </StyledButton>
+              <Link
+                href="/booking"
+                className="inline-block bg-pgc-white text-pgc-black font-bold px-8 py-4 rounded-full uppercase tracking-wider hover:bg-gray-100 hover:scale-105 transition-all duration-300"
+                style={{
+                  boxShadow:
+                    "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.1)",
+                }}
+              >
+                Book with {artist.name.split(" ")[0]}
               </Link>
             </div>
           </div>
@@ -180,11 +186,11 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
             }`}
             style={{ transitionDelay: "200ms" }}
           >
-            <div className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-8 md:p-12">
-              <h2 className="text-xl md:text-2xl font-bold mb-4 text-center tracking-wider">
-                ABOUT THE ARTIST
+            <div className="bg-pgc-900/50 backdrop-blur-sm rounded-lg p-8 md:p-12">
+              <h2 className="text-xl md:text-2xl font-bold mb-4 text-center uppercase tracking-wider text-pgc-white">
+                About the Artist
               </h2>
-              <p className="text-gray-300 leading-relaxed text-center">
+              <p className="text-pgc-300 leading-relaxed text-center">
                 {artist.bio}
               </p>
             </div>
@@ -199,8 +205,8 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
             }`}
             style={{ transitionDelay: "400ms" }}
           >
-            <h2 className="pgc-header text-2xl md:text-4xl font-bold text-center mb-10 tracking-wider">
-              PORTFOLIO
+            <h2 className="pgc-header text-2xl md:text-4xl font-bold text-center mb-10 uppercase tracking-wider text-pgc-white">
+              Portfolio
             </h2>
 
             <div className="grid grid-cols-2 md:grid-cols-3 gap-3 md:gap-4 max-w-6xl mx-auto">
@@ -232,15 +238,15 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               }`}
               style={{ transitionDelay: "600ms" }}
             >
-              <h2 className="pgc-header text-2xl md:text-4xl font-bold text-center mb-10 tracking-wider">
-                CLIENT REVIEWS
+              <h2 className="pgc-header text-2xl md:text-4xl font-bold text-center mb-10 uppercase tracking-wider text-pgc-white">
+                Client Reviews
               </h2>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
                 {artist.reviews.map((review, index) => (
                   <div
                     key={index}
-                    className="bg-gray-900/50 backdrop-blur-sm rounded-lg p-6"
+                    className="bg-pgc-900/50 backdrop-blur-sm rounded-lg p-6"
                   >
                     <div className="flex mb-3">
                       {[...Array(review.rating)].map((_, i) => (
@@ -250,10 +256,10 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
                         />
                       ))}
                     </div>
-                    <p className="text-gray-300 leading-relaxed mb-4 text-sm">
+                    <p className="text-pgc-300 leading-relaxed mb-4 text-sm">
                       &ldquo;{review.text}&rdquo;
                     </p>
-                    <p className="font-semibold text-white text-sm">
+                    <p className="font-semibold text-pgc-white text-sm">
                       {review.name}
                     </p>
                   </div>
@@ -264,10 +270,15 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
 
           {/* Bottom CTA */}
           <div className="text-center mt-16">
-            <Link href="/booking">
-              <StyledButton size="lg">
-                BOOK A CONSULTATION
-              </StyledButton>
+            <Link
+              href="/booking"
+              className="inline-block bg-pgc-white text-pgc-black font-bold px-10 py-4 md:px-14 md:py-5 rounded-full text-base md:text-lg uppercase tracking-wider hover:bg-gray-100 hover:scale-105 transition-all duration-300 shadow-2xl"
+              style={{
+                boxShadow:
+                  "0 0 30px rgba(255, 255, 255, 0.3), 0 0 60px rgba(255, 255, 255, 0.1)",
+              }}
+            >
+              Book a Consultation
             </Link>
           </div>
         </div>
@@ -278,7 +289,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
       {/* Lightbox */}
       {selectedImage !== null && (
         <div
-          className="fixed inset-0 bg-black/95 z-50 flex items-center justify-center overflow-hidden"
+          className="fixed inset-0 bg-pgc-black/95 z-50 flex items-center justify-center overflow-hidden"
           onTouchStart={onTouchStart}
           onTouchMove={onTouchMove}
           onTouchEnd={onTouchEnd}
@@ -289,7 +300,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               closeLightbox();
             }}
-            className="absolute top-4 right-4 md:top-6 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
+            className="absolute top-4 right-4 md:top-6 md:right-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <X className="w-8 h-8" />
           </button>
@@ -299,7 +310,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               prevImage();
             }}
-            className="absolute left-4 md:left-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
+            className="absolute left-4 md:left-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <ChevronLeft className="w-8 h-8 md:w-12 md:h-12" />
           </button>
@@ -309,7 +320,7 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
               e.stopPropagation();
               nextImage();
             }}
-            className="absolute right-4 md:right-6 text-white hover:text-gray-300 transition-colors z-60 p-3 md:p-2 bg-black/50 rounded-full"
+            className="absolute right-4 md:right-6 text-pgc-white hover:text-pgc-300 transition-colors duration-300 z-60 p-3 bg-pgc-black/50 rounded-full"
           >
             <ChevronRight className="w-8 h-8 md:w-12 md:h-12" />
           </button>
@@ -326,8 +337,8 @@ export default function ArtistGalleryPage({ artist }: ArtistGalleryPageProps) {
             />
           </div>
 
-          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-white">
-            <span className="text-lg">
+          <div className="absolute bottom-6 left-1/2 transform -translate-x-1/2 text-pgc-white">
+            <span className="text-sm tracking-wider">
               {selectedImage + 1} / {artist.galleryImages.length}
             </span>
           </div>
