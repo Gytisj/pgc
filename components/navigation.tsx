@@ -7,51 +7,38 @@ import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import pgcImage from "./assets/pgc.jpg";
 
+const navLinks = [
+  { href: "/", label: "Home" },
+  { href: "/#portfolio", label: "Portfolio" },
+  { href: "/#artists", label: "Artists" },
+  { href: "/#faq", label: "FAQ" },
+  { href: "/booking", label: "Book Now" },
+];
+
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
-  // Check if we're on a non-home page (like artist pages)
-  const isSubPage = pathname !== "/";
-
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Handle body scroll lock when mobile menu is open
   useEffect(() => {
-    if (isMobileMenuOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "unset";
-    }
-
-    // Cleanup function to restore scroll when component unmounts
+    document.body.style.overflow = isMobileMenuOpen ? "hidden" : "unset";
     return () => {
       document.body.style.overflow = "unset";
     };
   }, [isMobileMenuOpen]);
 
-  // Handle ESC key to close mobile menu
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape" && isMobileMenuOpen) {
-        setIsMobileMenuOpen(false);
-      }
+      if (e.key === "Escape" && isMobileMenuOpen) setIsMobileMenuOpen(false);
     };
-
-    if (isMobileMenuOpen) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
+    if (isMobileMenuOpen) window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
   }, [isMobileMenuOpen]);
 
   return (
@@ -77,29 +64,31 @@ export default function Navigation() {
               />
             </div>
           </Link>
-          <div className="hidden md:flex space-x-8">
-            <Link href="/" className="hover:text-gray-300 transition-colors">
-              Home
-            </Link>
-            <Link
-              href="/#about"
-              className="hover:text-gray-300 transition-colors"
-            >
-              About
-            </Link>
-            <Link
-              href="/#artists"
-              className="hover:text-gray-300 transition-colors"
-            >
-              Artists
-            </Link>
-            <Link
-              href="/#contact"
-              className="hover:text-gray-300 transition-colors"
-            >
-              Contact
-            </Link>
+
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center space-x-8">
+            {navLinks.map((link) =>
+              link.label === "Book Now" ? (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="bg-white text-black px-5 py-2 rounded-full text-sm font-bold tracking-wider hover:bg-gray-100 transition-colors"
+                >
+                  {link.label}
+                </Link>
+              ) : (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="hover:text-gray-300 transition-colors text-sm tracking-wider"
+                >
+                  {link.label}
+                </Link>
+              )
+            )}
           </div>
+
+          {/* Mobile Hamburger */}
           <div className="md:hidden">
             <button
               className="text-white"
@@ -115,11 +104,7 @@ export default function Navigation() {
                   strokeLinecap="round"
                   strokeLinejoin="round"
                   strokeWidth={2}
-                  d={
-                    isMobileMenuOpen
-                      ? "M6 18L18 6M6 6l12 12"
-                      : "M4 6h16M4 12h16M4 18h16"
-                  }
+                  d="M4 6h16M4 12h16M4 18h16"
                 />
               </svg>
             </button>
@@ -134,7 +119,6 @@ export default function Navigation() {
         } bg-black`}
         onClick={() => setIsMobileMenuOpen(false)}
       >
-        {/* Close Button */}
         <button
           onClick={() => setIsMobileMenuOpen(false)}
           className="absolute top-4 right-8 text-white hover:text-gray-300 transition-colors z-60 p-2"
@@ -143,39 +127,23 @@ export default function Navigation() {
         </button>
 
         <div
-          className="flex flex-col items-center justify-center h-full space-y-12"
+          className="flex flex-col items-center justify-center h-full space-y-8"
           onClick={(e) => e.stopPropagation()}
         >
-          <div className="text-center space-y-8">
+          {navLinks.map((link) => (
             <Link
-              href="/"
-              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
+              key={link.href}
+              href={link.href}
+              className={`block text-white hover:text-gray-300 transition-all duration-300 tracking-wider hover:scale-110 ${
+                link.label === "Book Now"
+                  ? "bg-white text-black px-8 py-3 rounded-full text-xl font-bold hover:bg-gray-100 hover:text-black"
+                  : "text-3xl font-light"
+              }`}
               onClick={() => setIsMobileMenuOpen(false)}
             >
-              Home
+              {link.label}
             </Link>
-            <Link
-              href="/#about"
-              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              About
-            </Link>
-            <Link
-              href="/#artists"
-              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Artists
-            </Link>
-            <Link
-              href="/#contact"
-              className="block text-white hover:text-gray-300 transition-all duration-300 text-3xl font-light tracking-wider hover:scale-110"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Contact
-            </Link>
-          </div>
+          ))}
         </div>
       </div>
     </nav>
